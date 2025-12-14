@@ -10,7 +10,7 @@
       system = "x86_64-linux";
       host = "misato";
     in {
-      nixosConfiguration.${host} = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.${host} = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
           ./configuration.nix
