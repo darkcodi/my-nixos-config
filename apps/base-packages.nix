@@ -6,5 +6,6 @@
     fd
     bat
     eza
+    alejandra
   ];
 }
