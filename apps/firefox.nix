@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{...}: {
   programs.firefox = {
     enable = true;
     profiles.default = {
@@ -8,9 +8,6 @@
         "browser.theme.dark.activetab" = true;
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
       };
-      extensions = with pkgs.firefox-addons; [
-        ublock-origin
-      ];
     };
   };
 }
