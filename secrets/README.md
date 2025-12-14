@@ -14,6 +14,7 @@ Or add it to your packages for convenience.
 ## File Structure
 
 - `secrets.nix` - Defines which public keys can decrypt each secret
+- `decrypt.nix` - Home-manager configuration for age secrets
 - `*.age` - Encrypted secret files
 
 ## Adding a New Secret
@@ -35,14 +36,14 @@ nix run github:ryantm/agenix -- -e new-secret.age
 
 This opens your `$EDITOR`. Type/paste the secret content, save, and exit.
 
-### 3. Configure decryption in `home.nix`
+### 3. Configure decryption in `decrypt.nix`
 
-Add the secret to `age.secrets`:
+Add the secret to `age.secrets` in `secrets/decrypt.nix`:
 
 ```nix
 age.secrets = {
   "new-secret" = {
-    file = ./secrets/new-secret.age;
+    file = ./new-secret.age;
     path = "${homeDir}/.config/app/secret.txt";  # where to decrypt
     mode = "0400";  # file permissions (readonly)
   };
@@ -80,11 +81,11 @@ cat ~/.config/app/credentials.conf  # copy content
 nix run github:ryantm/agenix -- -e app-credentials.age  # paste in editor
 ```
 
-### 3. Configure in `home.nix`
+### 3. Configure in `decrypt.nix`
 
 ```nix
 age.secrets."app-credentials" = {
-  file = ./secrets/app-credentials.age;
+  file = ./app-credentials.age;
   path = "${homeDir}/.config/app/credentials.conf";
   mode = "0600";
 };
