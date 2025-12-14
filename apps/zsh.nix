@@ -10,6 +10,8 @@
     shellAliases = {
       ll = "ls -alh";
       rebuild-switch = "sudo nixos-rebuild switch --flake .#misato";
+      rebuild-test = "sudo nixos-rebuild test --flake .#misato";
+      rebuild-rollback = "sudo nixos-rebuild --rollback switch --flake .#misato";
     };
 
     initContent = ''
