@@ -12,6 +12,7 @@
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 20;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "misato"; # Define your hostname.
@@ -95,6 +96,26 @@
 
   # Enable experimental features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  # Regular garbage collection + prune old generations
+  nix.gc = {
+    automatic = true;
+
+    # systemd.time(7) format; "weekly" is common
+    dates ="weekly";
+
+    # nice on laptops / fleets so everything doesn't hammer disk at once
+    randomizedDelaySec = "15min";
+
+    # this is the big one: deletes profiles generations older than N days
+    options = "--delete-older-than 14d";
+  };
+
+  # Deduplicate the store (saves space; can take time on big stores)
+  nix.optimise = {
+    automatic = true;
+    dates = [ "weekly" ];
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
