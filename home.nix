@@ -14,9 +14,11 @@
 
   programs.git = {
     enable = true;
-    userName = "darkcodi";
-    userEmail = "trooper982@gmail.com";
-    extraConfig = { init.defaultBranch = "master"; };
+    settings = {
+      user.name = "darkcodi";
+      user.email = "trooper982@gmail.com";
+      init.defaultBranch = "master";
+    };
   };
 
   programs.zsh.enable = true;
