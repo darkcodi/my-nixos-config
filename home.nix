@@ -31,7 +31,20 @@
     };
   };
 
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    shellAliases = {
+      ll = "ls -alh";
+      rebuild-switch="sudo nixos-rebuild switch --flake .#misato";
+    };
+    initContent = ''
+      # extra zsh config here
+    '';
+  };
+
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
 }
