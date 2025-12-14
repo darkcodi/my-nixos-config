@@ -8,9 +8,10 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs = { self, nixpkgs, home-manager, agenix, ... }:
     let
       system = "x86_64-linux";
       host = "misato";
@@ -25,7 +26,12 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.${user} = import ./home.nix;
+            home-manager.users.${user} = {
+              imports = [
+                agenix.homeManagerModules.default
+                ./home.nix
+              ];
+            };
           }
         ];
       };

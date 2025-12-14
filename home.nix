@@ -1,8 +1,12 @@
 { config, pkgs, ... }:
 
+let
+  username = "darkcodi";
+  homeDir = "/home/${username}";
+in
 {
-  home.username = "darkcodi";
-  home.homeDirectory = "/home/darkcodi";
+  home.username = username;
+  home.homeDirectory = homeDir;
 
   home.stateVersion = "25.11";
 
@@ -15,7 +19,7 @@
   programs.git = {
     enable = true;
     settings = {
-      user.name = "darkcodi";
+      user.name = username;
       user.email = "trooper982@gmail.com";
       init.defaultBranch = "master";
     };
@@ -77,5 +81,16 @@
     #    ANTHROPIC_DEFAULT_HAIKU_MODEL = "MiniMax-M2";
     #  };
     #};
+  };
+
+  # Agenix configuration for user secrets
+  age.identityPaths = [ "${homeDir}/.ssh/id_ed25519" ];
+  age.secrets = {
+    # Example secret: API key for sometool
+    "sometool-apikey" = {
+      file = ./secrets/sometool-apikey.age;
+      path = "${homeDir}/.sometool/apikey.txt";
+      mode = "0400"; # readonly
+    };
   };
 }
