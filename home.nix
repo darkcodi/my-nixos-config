@@ -1,8 +1,11 @@
-{ config, pkgs, lib, ... }:
-
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 # Import all app configurations
 # To disable an app, comment out its import below
-
 {
   imports = [
     # Core packages

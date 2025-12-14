@@ -1,11 +1,8 @@
-{ config, ... }:
-
-let
+{config, ...}: let
   homeDir = config.home.homeDirectory;
-in
-{
+in {
   # Agenix configuration for user secrets
-  age.identityPaths = [ "${homeDir}/.ssh/id_ed25519" ];
+  age.identityPaths = ["${homeDir}/.ssh/id_ed25519"];
   age.secrets = {
     minimaxCodingPlanApikey = {
       file = ./minimax-coding-plan-apikey.age;

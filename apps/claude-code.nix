@@ -1,13 +1,14 @@
-{ config, pkgs, ... }:
-
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   claudeOriginal = pkgs.claude-code;
   claudeWrapped = pkgs.writeShellScriptBin "claude" ''
     export ANTHROPIC_AUTH_TOKEN="$(cat ${config.age.secrets.minimaxCodingPlanApikey.path})"
     exec ${claudeOriginal}/bin/claude "$@"
   '';
-in
-{
+in {
   programs.claude-code = {
     enable = true;
     package = claudeWrapped;

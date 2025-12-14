@@ -11,33 +11,38 @@
     agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = { self, nixpkgs, home-manager, agenix, ... }:
-    let
-      system = "x86_64-linux";
-      host = "misato";
-      user = "darkcodi";
-    in {
-      nixosConfigurations.${host} = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          ./configuration.nix
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    agenix,
+    ...
+  }: let
+    system = "x86_64-linux";
+    host = "misato";
+    user = "darkcodi";
+  in {
+    nixosConfigurations.${host} = nixpkgs.lib.nixosSystem {
+      inherit system;
+      modules = [
+        ./configuration.nix
 
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.${user} = {
-              imports = [
-                agenix.homeManagerModules.default
-                ./home.nix
-              ];
-              programs.home-manager.enable = true;
-              home.username = user;
-              home.homeDirectory = "/home/${user}";
-              home.stateVersion = "25.11";
-            };
-          }
-        ];
-      };
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.${user} = {
+            imports = [
+              agenix.homeManagerModules.default
+              ./home.nix
+            ];
+            programs.home-manager.enable = true;
+            home.username = user;
+            home.homeDirectory = "/home/${user}";
+            home.stateVersion = "25.11";
+          };
+        }
+      ];
     };
+  };
 }
