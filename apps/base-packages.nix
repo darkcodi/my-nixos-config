@@ -5,5 +5,8 @@
     bat
     eza
     alejandra
+    fzf
+    jq
+    yq
   ];
 }
