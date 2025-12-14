@@ -1,8 +1,16 @@
 { config, pkgs, ... }:
 
+let
+  claudeOriginal = pkgs.claude-code;
+  claudeWrapped = pkgs.writeShellScriptBin "claude" ''
+    export ANTHROPIC_AUTH_TOKEN="$(cat ${config.age.secrets.minimaxCodingPlanApikey.path})"
+    exec ${claudeOriginal}/bin/claude "$@"
+  '';
+in
 {
   programs.claude-code = {
     enable = true;
+    package = claudeWrapped;
     settings = {
       theme = "dark";
 
@@ -20,12 +28,4 @@
       };
     };
   };
-
-  # wrapper injects an auth token at runtime from the decrypted path
-  home.packages = [
-    (pkgs.writeShellScriptBin "claude-m2" ''
-      export ANTHROPIC_AUTH_TOKEN="$(cat ${config.age.secrets.minimaxCodingPlanApikey.path})"
-      exec ${pkgs.claude-code}/bin/claude "$@"
-    '')
-  ];
 }
