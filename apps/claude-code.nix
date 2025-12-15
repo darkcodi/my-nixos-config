@@ -26,6 +26,7 @@ in {
         ANTHROPIC_DEFAULT_SONET_MODEL = "MiniMax-M2";
         ANTHROPIC_DEFAULT_OPUS_MODEL = "MiniMax-M2";
         ANTHROPIC_DEFAULT_HAIKU_MODEL = "MiniMax-M2";
+        MAX_THINKING_TOKENS = "31999";
       };
     };
   };
