@@ -18,31 +18,43 @@
     agenix,
     ...
   }: let
-    system = "x86_64-linux";
-    host = "misato";
-    user = "darkcodi";
-  in {
-    nixosConfigurations.${host} = nixpkgs.lib.nixosSystem {
-      inherit system;
-      modules = [
-        ./configuration.nix
-
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.${user} = {
-            imports = [
-              agenix.homeManagerModules.default
-              ./home.nix
-            ];
-            programs.home-manager.enable = true;
-            home.username = user;
-            home.homeDirectory = "/home/${user}";
-            home.stateVersion = "25.11";
-          };
-        }
-      ];
+    hosts = {
+      # Current machine
+      misato = {
+        system = "x86_64-linux";
+        user = "darkcodi";
+      };
+      # Future machines - add as needed
+      # potato-laptop = { system = "arm64-linux"; user = "darkcodi"; };
+      # gaming-desktop = { system = "x86_64-linux"; user = "darkcodi"; };
+      # server = { system = "x86_64-linux"; user = "darkcodi"; };
     };
+  in {
+    # Auto-generate NixOS configurations for all hosts
+    nixosConfigurations = nixpkgs.lib.mapAttrs (
+      hostName: cfg:
+        nixpkgs.lib.nixosSystem {
+          system = cfg.system;
+          modules = [
+            ./hosts/${hostName}/system.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.${cfg.user} = {
+                imports = [
+                  agenix.homeManagerModules.default
+                  ./hosts/${hostName}/user.nix
+                ];
+                home.username = cfg.user;
+                home.homeDirectory = "/home/${cfg.user}";
+                home.stateVersion = "25.11";
+                programs.home-manager.enable = true;
+              };
+            }
+          ];
+        }
+    )
+    hosts;
   };
 }

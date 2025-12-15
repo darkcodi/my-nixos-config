@@ -1,0 +1,20 @@
+{...}: {
+  imports = [
+    ../../common/home.nix
+    ../../apps/base-packages.nix
+    ../../apps/git.nix
+    ../../apps/firefox.nix
+    ../../apps/zsh.nix
+    ../../apps/direnv.nix
+    ../../apps/claude-code.nix
+    ../../secrets/decrypt.nix
+  ];
+
+  # Host-specific aliases
+  programs.zsh.shellAliases = {
+    ll = "ls -alh";
+    rebuild-switch = "sudo nixos-rebuild switch --flake .#misato";
+    rebuild-test = "sudo nixos-rebuild test --flake .#misato";
+    rebuild-rollback = "sudo nixos-rebuild --rollback switch --flake .#misato";
+  };
+}

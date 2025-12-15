@@ -5,13 +5,6 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    shellAliases = {
-      ll = "ls -alh";
-      rebuild-switch = "sudo nixos-rebuild switch --flake .#misato";
-      rebuild-test = "sudo nixos-rebuild test --flake .#misato";
-      rebuild-rollback = "sudo nixos-rebuild --rollback switch --flake .#misato";
-    };
-
     initContent = ''
       # extra zsh config here
     '';
