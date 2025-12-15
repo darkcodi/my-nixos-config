@@ -31,30 +31,31 @@
     };
   in {
     # Auto-generate NixOS configurations for all hosts
-    nixosConfigurations = nixpkgs.lib.mapAttrs (
-      hostName: cfg:
-        nixpkgs.lib.nixosSystem {
-          system = cfg.system;
-          modules = [
-            ./hosts/${hostName}/system.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.${cfg.user} = {
-                imports = [
-                  agenix.homeManagerModules.default
-                  ./hosts/${hostName}/user.nix
-                ];
-                home.username = cfg.user;
-                home.homeDirectory = "/home/${cfg.user}";
-                home.stateVersion = "25.11";
-                programs.home-manager.enable = true;
-              };
-            }
-          ];
-        }
-    )
-    hosts;
+    nixosConfigurations =
+      nixpkgs.lib.mapAttrs (
+        hostName: cfg:
+          nixpkgs.lib.nixosSystem {
+            system = cfg.system;
+            modules = [
+              ./hosts/${hostName}/system.nix
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.users.${cfg.user} = {
+                  imports = [
+                    agenix.homeManagerModules.default
+                    ./hosts/${hostName}/user.nix
+                  ];
+                  home.username = cfg.user;
+                  home.homeDirectory = "/home/${cfg.user}";
+                  home.stateVersion = "25.11";
+                  programs.home-manager.enable = true;
+                };
+              }
+            ];
+          }
+      )
+      hosts;
   };
 }
