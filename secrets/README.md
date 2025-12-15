@@ -30,7 +30,7 @@ Add an entry specifying which public keys can decrypt it:
 ### 2. Create the encrypted file
 
 ```bash
-cd /home/darkcodi/nixos/secrets
+cd $HOME/my-nixos-config/secrets
 nix run github:ryantm/agenix -- -e new-secret.age
 ```
 
@@ -71,7 +71,7 @@ If an application already created a config file (e.g., `~/.config/app/credential
 ### 2. Encrypt the existing file
 
 ```bash
-cd /home/darkcodi/nixos/secrets
+cd $HOME/my-nixos-config/secrets
 nix run github:ryantm/agenix -- -e app-credentials.age < ~/.config/app/credentials.conf
 ```
 
@@ -106,7 +106,7 @@ If a program modified a decrypted file (e.g., appended data to `~/.config/app/co
 ### Option 1: Re-encrypt from the current file
 
 ```bash
-cd /home/darkcodi/nixos/secrets
+cd $HOME/my-nixos-config/secrets
 nix run github:ryantm/agenix -- -e app-config.age < ~/.config/app/config.conf
 ```
 
@@ -115,7 +115,7 @@ This overwrites `app-config.age` with the new encrypted content.
 ### Option 2: Edit interactively
 
 ```bash
-cd /home/darkcodi/nixos/secrets
+cd $HOME/my-nixos-config/secrets
 nix run github:ryantm/agenix -- -e app-config.age
 ```
 
@@ -135,7 +135,7 @@ sudo nixos-rebuild switch --flake .#misato
 If you add/remove a public key in `secrets.nix`, rekey all affected secrets:
 
 ```bash
-cd /home/darkcodi/nixos/secrets
+cd $HOME/my-nixos-config/secrets
 nix run github:ryantm/agenix -- -r
 ```
 

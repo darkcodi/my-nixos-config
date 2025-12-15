@@ -19,15 +19,15 @@
     ...
   }: let
     hosts = {
-      # Current machine
       misato = {
         system = "x86_64-linux";
         user = "darkcodi";
       };
       # Future machines - add as needed
-      # potato-laptop = { system = "arm64-linux"; user = "darkcodi"; };
-      # gaming-desktop = { system = "x86_64-linux"; user = "darkcodi"; };
-      # server = { system = "x86_64-linux"; user = "darkcodi"; };
+      # rei = {
+      #   system = "x86_64-linux";
+      #   user = "darkcodi";
+      # };
     };
   in {
     # Auto-generate NixOS configurations for all hosts
