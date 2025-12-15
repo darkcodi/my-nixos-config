@@ -8,5 +8,6 @@
     fzf
     jq
     yq
+    tree
   ];
 }
