@@ -5,19 +5,19 @@ in {
 
   age.secrets = {
     minimaxCodingPlanApikey = {
-      file = ./minimax-coding-plan-apikey.age;
+      file = ./age-files/minimax-coding-plan-apikey.age;
       path = "${homeDir}/.minimax/apikey.txt";
       mode = "0400";
     };
 
     misatoSshPrivkey = {
-      file = ./nixos-misato-ssh-privkey.age;
+      file = ./age-files/nixos-misato-ssh-privkey.age;
       path = "${homeDir}/.ssh/id_ed25519";
       mode = "0400";
     };
 
     misatoSshPubkey = {
-      file = ./nixos-misato-ssh-pubkey.age;
+      file = ./age-files/nixos-misato-ssh-pubkey.age;
       path = "${homeDir}/.ssh/id_ed25519.pub";
       mode = "0444";
     };
