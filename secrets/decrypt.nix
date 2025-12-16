@@ -7,7 +7,19 @@ in {
     minimaxCodingPlanApikey = {
       file = ./minimax-coding-plan-apikey.age;
       path = "${homeDir}/.minimax/apikey.txt";
-      mode = "0400"; # readonly
+      mode = "0400";
+    };
+
+    misatoSshPrivkey = {
+      file = ./nixos-misato-ssh-privkey.age;
+      path = "${homeDir}/.ssh/id_ed25519";
+      mode = "0400";
+    };
+
+    misatoSshPubkey = {
+      file = ./nixos-misato-ssh-pubkey.age;
+      path = "${homeDir}/.ssh/id_ed25519.pub";
+      mode = "0444";
     };
   };
 }
