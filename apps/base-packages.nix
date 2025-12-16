@@ -9,5 +9,6 @@
     jq
     yq
     tree
+    age
   ];
 }
