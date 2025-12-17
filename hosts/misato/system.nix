@@ -1,9 +1,20 @@
-{...}: {
+{pkgs, ...}: {
   imports = [
     ./hardware.nix
     ../../common/nixos.nix
     ../../apps/gnome.nix
   ];
+
+  # Add QEMU for VM testing
+  environment.systemPackages = with pkgs; [
+    qemu_full
+    libvirt
+    virt-manager
+  ];
+
+  # Enable libvirtd
+  virtualisation.libvirtd.enable = true;
+  users.groups.libvirtd = {};
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
