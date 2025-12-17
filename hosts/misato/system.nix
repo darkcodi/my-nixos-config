@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   imports = [
-    ./hardware.nix
+    ./disko.nix
     ../../common/nixos.nix
     ../../apps/gnome.nix
   ];
