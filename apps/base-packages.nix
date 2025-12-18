@@ -10,5 +10,6 @@
     yq
     tree
     age
+    glow
   ];
 }
