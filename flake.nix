@@ -9,8 +9,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     agenix.url = "github:ryantm/agenix";
-    disko.url = "github:nix-community/disko/latest";
-    disko.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -18,7 +16,6 @@
     nixpkgs,
     home-manager,
     agenix,
-    disko,
     ...
   }: let
     hosts = {
@@ -40,7 +37,6 @@
           nixpkgs.lib.nixosSystem {
             system = cfg.system;
             modules = [
-              disko.nixosModules.disko
               ./hosts/${hostName}/system.nix
               home-manager.nixosModules.home-manager
               {
