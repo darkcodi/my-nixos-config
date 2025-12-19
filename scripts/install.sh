@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Run this script from NixOS live ISO like this:
 # $ curl -fsSL https://raw.githubusercontent.com/darkcodi/my-nixos-config/main/install.sh | bash

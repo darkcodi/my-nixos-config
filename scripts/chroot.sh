@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 sudo -i
 cryptsetup open /dev/sda2 cryptroot
