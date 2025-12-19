@@ -1,0 +1,53 @@
+{lib, ...}: {
+  disko.devices = {
+    disk = {
+      main = {
+        type = "disk";
+
+        # disko-install will overwrite this with --disk main <device>
+        device = lib.mkDefault "/dev/placeholder";
+
+        content = {
+          type = "gpt";
+          partitions = {
+            ESP = {
+              size = "512M";
+              type = "EF00";
+              content = {
+                type = "filesystem";
+                format = "vfat";
+                mountpoint = "/boot";
+                mountOptions = ["umask=0077"];
+              };
+            };
+            luks = {
+              size = "100%";
+              content = {
+                type = "luks";
+                name = "luks-root";
+                initrdUnlock = true;
+                settings = {
+                  allowDiscards = true;
+                };
+                content = {
+                  type = "btrfs";
+                  extraArgs = ["-f"];
+                  subvolumes = {
+                    "@" = {
+                      mountpoint = "/";
+                      mountOptions = ["subvol=@"];
+                    };
+                    "@home" = {
+                      mountpoint = "/home";
+                      mountOptions = ["subvol=@home"];
+                    };
+                  };
+                };
+              };
+            };
+          };
+        };
+      };
+    };
+  };
+}

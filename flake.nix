@@ -8,7 +8,10 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     agenix.url = "github:ryantm/agenix";
+
+    disko.url = "github:nix-community/disko";
   };
 
   outputs = {
@@ -16,6 +19,7 @@
     nixpkgs,
     home-manager,
     agenix,
+    disko,
     ...
   }: let
     hosts = {
@@ -37,7 +41,10 @@
           nixpkgs.lib.nixosSystem {
             system = cfg.system;
             modules = [
+              disko.nixosModules.disko
+              ./hosts/${hostName}/disk-config.nix
               ./hosts/${hostName}/system.nix
+
               home-manager.nixosModules.home-manager
               {
                 home-manager.useGlobalPkgs = true;
