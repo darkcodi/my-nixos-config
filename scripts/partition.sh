@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Run this script from NixOS live ISO like this:
+# $ curl -fsSL https://raw.githubusercontent.com/darkcodi/my-nixos-config/main/scripts/partition.sh | bash
+
 set -euo pipefail
 
 REPO="https://github.com/darkcodi/my-nixos-config"

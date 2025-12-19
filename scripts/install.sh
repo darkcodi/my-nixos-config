@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Run this script from NixOS live ISO like this:
-# $ curl -fsSL https://raw.githubusercontent.com/darkcodi/my-nixos-config/main/install.sh | bash
+# $ curl -fsSL https://raw.githubusercontent.com/darkcodi/my-nixos-config/main/scripts/install.sh | bash
 
 set -euo pipefail
 
