@@ -22,7 +22,7 @@ sudo mkswap /dev/zram0
 sudo swapon /dev/zram0
 
 # Disable concurrency build to reduce RAM usage
-export NIX_CONFIG=$'max-jobs = 1\ncores = 1\n'
+# export NIX_CONFIG=$'max-jobs = 1\ncores = 1\n'
 
 # Perform the installation
 sudo nixos-install --root /mnt --flake $DIR#misato
