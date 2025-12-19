@@ -34,6 +34,14 @@
                       mountpoint = "/";
                       mountOptions = ["subvol=@"];
                     };
+                    "@persistent" = {
+                      mountpoint = "/persistent";
+                      mountOptions = ["subvol=@persistent"];
+                    };
+                    "@nix" = {
+                      mountpoint = "/nix";
+                      mountOptions = ["subvol=@nix"];
+                    };
                     "@home" = {
                       mountpoint = "/home";
                       mountOptions = ["subvol=@home"];
