@@ -42,7 +42,7 @@
             system = cfg.system;
             modules = [
               disko.nixosModules.disko
-              ./hosts/${hostName}/disk-config.nix
+              ./hosts/${hostName}/disko.nix
               ./hosts/${hostName}/system.nix
 
               home-manager.nixosModules.home-manager
