@@ -7,6 +7,7 @@ set -euo pipefail
 
 REPO="https://github.com/darkcodi/my-nixos-config"
 DIR="/tmp/nixos-config"
+HOST="misato"
 
 # Clone the repo if does not exist
 if [ -d "$DIR/.git" ]; then
@@ -16,6 +17,6 @@ else
 fi
 
 # Partition the disk
-sudo nix ---extra-experimental-features "nix-command flakes" \
+sudo nix --extra-experimental-features "nix-command flakes" \
   run github:nix-community/disko/latest -- \
   --mode disko "$DIR/hosts/$HOST/disko.nix"
