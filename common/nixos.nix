@@ -24,6 +24,7 @@
   users.users.darkcodi = {
     isNormalUser = true;
     description = "darkcodi";
+    initialPassword = "changeme";
     extraGroups = ["networkmanager" "wheel"];
     shell = pkgs.zsh;
     packages = with pkgs; [
