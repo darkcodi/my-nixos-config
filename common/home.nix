@@ -1,4 +1,9 @@
-{config, ...}: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   home.username = "darkcodi";
   home.homeDirectory = "/home/darkcodi";
   home.stateVersion = "25.11";
@@ -11,4 +16,10 @@
       init.defaultBranch = "main";
     };
   };
+
+  home.activation.cloneMyRepo = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    if [ ! -d "/home/darkcodi/my-nixos-config/.git" ]; then
+      ${pkgs.git}/bin/git clone "https://github.com/darkcodi/my-nixos-config" "/home/darkcodi/my-nixos-config"
+    fi
+  '';
 }
