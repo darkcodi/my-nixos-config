@@ -1,12 +1,9 @@
-{lib, ...}: {
+{...}: {
   disko.devices = {
     disk = {
       main = {
         type = "disk";
-
-        # disko-install will overwrite this with --disk main <device>
-        device = lib.mkDefault "/dev/placeholder";
-
+        device = "/dev/disk/by-path/pci-0000:00:17.0-ata-2";
         content = {
           type = "gpt";
           partitions = {
