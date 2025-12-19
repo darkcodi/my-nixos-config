@@ -25,8 +25,7 @@
                 name = "luks-root";
                 settings = {
                   allowDiscards = true;
-                  # For production: uses passphrase (interactive)
-                  # For test: override this file to use keyFile
+                  keyFile = "/tmp/secret.key";
                 };
                 content = {
                   type = "btrfs";
