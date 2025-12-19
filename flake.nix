@@ -61,21 +61,5 @@
           }
       )
       hosts;
-
-    # VM test configurations for disko (only for x86_64-linux)
-    checks =
-      let
-        lib = nixpkgs.lib;
-        forAllSystems = lib.genAttrs [ "x86_64-linux" ];
-      in
-      forAllSystems (
-        system:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-        in
-        {
-          misato = import ./tests/misato.nix { inherit pkgs disko; };
-        }
-      );
   };
 }

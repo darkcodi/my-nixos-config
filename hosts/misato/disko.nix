@@ -9,7 +9,6 @@
           partitions = {
             ESP = {
               size = "512M";
-              start = "1MiB";  # Start after 1MiB to avoid alignment issues
               type = "EF00";
               content = {
                 type = "filesystem";
@@ -19,13 +18,12 @@
               };
             };
             luks = {
-              # Takes all remaining space after EFI partition
+              size = "100%";
               content = {
                 type = "luks";
                 name = "luks-root";
                 settings = {
                   allowDiscards = true;
-                  keyFile = "/tmp/secret.key";
                 };
                 content = {
                   type = "btrfs";
