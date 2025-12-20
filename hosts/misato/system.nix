@@ -23,18 +23,18 @@
 
     # Critical system paths to persist
     directories = [
-      "etc/NetworkManager/system-connections" # Wi-Fi configs
-      "var/lib/bluetooth" # Bluetooth pairings
-      "var/lib/systemd" # Systemd state
-      "nix" # Nix store (fast rebuilds)
+      "/etc/NetworkManager/system-connections" # Wi-Fi configs
+      "/var/lib/bluetooth" # Bluetooth pairings
+      "/var/lib/systemd" # Systemd state
+      "/nix" # Nix store (fast rebuilds)
     ];
 
     # Files to persist
     files = [
-      "etc/machine-id" # Machine ID
-      "etc/ssh/ssh_host_rsa_key" # SSH host key
-      "etc/ssh/ssh_host_ed25519_key" # SSH host key
-      "var/lib/systemd/random-seed" # Random seed for faster boot
+      "/etc/machine-id" # Machine ID
+      "/etc/ssh/ssh_host_rsa_key" # SSH host key
+      "/etc/ssh/ssh_host_ed25519_key" # SSH host key
+      "/var/lib/systemd/random-seed" # Random seed for faster boot
     ];
 
     # User-specific persistence using impermanence's user support
