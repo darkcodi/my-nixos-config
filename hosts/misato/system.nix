@@ -26,7 +26,7 @@
       "/etc/NetworkManager/system-connections" # Wi-Fi configs
       "/var/lib/bluetooth" # Bluetooth pairings
       "/var/lib/systemd" # Systemd state
-      "/nix" # Nix store (fast rebuilds)
+      # Note: /nix is a separate BTRFS subvolume, no need to persist
     ];
 
     # Files to persist
