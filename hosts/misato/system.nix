@@ -36,6 +36,7 @@
       "/etc/NetworkManager/system-connections" # Wi-Fi configs
       "/var/lib/bluetooth" # Bluetooth pairings
       "/var/lib/systemd" # Systemd state
+      "/var/lib/nixos" # Preserve user/group IDs to prevent reassignment
       # Note: /nix is a separate BTRFS subvolume, no need to persist
     ];
 
