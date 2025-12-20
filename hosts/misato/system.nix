@@ -16,6 +16,47 @@
   virtualisation.libvirtd.enable = true;
   users.groups.libvirtd = {};
 
+  # Persistence configuration
+  environment.persistence."/persistent" = {
+    enable = true;
+    hideMounts = true;
+
+    # Critical system paths to persist
+    directories = [
+      "etc/NetworkManager/system-connections" # Wi-Fi configs
+      "var/lib/bluetooth" # Bluetooth pairings
+      "var/lib/systemd" # Systemd state
+      "nix" # Nix store (fast rebuilds)
+    ];
+
+    # Files to persist
+    files = [
+      "etc/machine-id" # Machine ID
+      "etc/ssh/ssh_host_rsa_key" # SSH host key
+      "etc/ssh/ssh_host_ed25519_key" # SSH host key
+      "var/lib/systemd/random-seed" # Random seed for faster boot
+    ];
+
+    # User-specific persistence using impermanence's user support
+    users.darkcodi = {
+      directories = [
+        ".ssh" # SSH keys
+        ".mozilla" # Firefox profile & state
+        ".local/state/nix" # Nix state
+        ".local/state/home-manager" # Home-manager state
+        ".local/share/nix" # Nix user data
+        "my-nixos-config" # This repository
+      ];
+
+      files = [
+        # Add user files here if needed
+      ];
+    };
+  };
+
+  # Enable FUSE for home-manager bind mounts
+  programs.fuse.userAllowOther = true;
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 20;

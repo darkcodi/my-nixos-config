@@ -12,6 +12,8 @@
     agenix.url = "github:ryantm/agenix";
 
     disko.url = "github:nix-community/disko";
+
+    impermanence.url = "github:nix-community/impermanence";
   };
 
   outputs = {
@@ -20,6 +22,7 @@
     home-manager,
     agenix,
     disko,
+    impermanence,
     ...
   }: let
     hosts = {
@@ -41,6 +44,7 @@
           nixpkgs.lib.nixosSystem {
             system = cfg.system;
             modules = [
+              impermanence.nixosModules.impermanence
               disko.nixosModules.disko
               ./hosts/${hostName}/disko.nix
               ./hosts/${hostName}/system.nix
