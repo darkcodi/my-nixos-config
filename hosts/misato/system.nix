@@ -16,6 +16,16 @@
   virtualisation.libvirtd.enable = true;
   users.groups.libvirtd = {};
 
+  # File system configuration for persistent storage
+  # Required by impermanence: neededForBoot = true
+  # Note: disko handles the creation, we just need to mark it as neededForBoot
+  fileSystems."/persistent" = {
+    device = "/dev/mapper/luks-root";
+    fsType = "btrfs";
+    options = ["subvol=@persistent"];
+    neededForBoot = true;
+  };
+
   # Persistence configuration
   environment.persistence."/persistent" = {
     enable = true;

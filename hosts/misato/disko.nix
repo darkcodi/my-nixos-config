@@ -37,7 +37,6 @@
                     "@persistent" = {
                       mountpoint = "/persistent";
                       mountOptions = ["subvol=@persistent"];
-                      neededForBoot = true; # Required by impermanence
                     };
                     "@nix" = {
                       mountpoint = "/nix";
