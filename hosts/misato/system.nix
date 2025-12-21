@@ -70,22 +70,36 @@
     };
   };
 
-  # Make the root subvolume ephemeral - no backups
-  # Wipe the old root subvolume when LUKS is unlocked but before root mount
-  boot.initrd.luks.postUnlockCommands = ''
-    # Mount the BTRFS filesystem root (all subvolumes visible)
-    mkdir -p /mnt
-    mount -o subvol=/ /dev/mapper/luks-root /mnt
+  # Make the root subvolume ephemeral - official impermanence approach
+  boot.initrd.postResumeCommands = lib.mkAfter ''
+    # Mount the BTRFS filesystem to see all subvolumes
+    mkdir /btrfs_tmp
+    mount /dev/mapper/luks-root /btrfs_tmp
 
-    # Delete the old root subvolume (it's not mounted yet, so this should work)
-    if [[ -e /mnt/@ ]]; then
-      btrfs subvolume delete /mnt/@
+    # Archive the old root subvolume
+    if [[ -e /btrfs_tmp/@ ]]; then
+      mkdir -p /btrfs_tmp/old_roots
+      timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/@)" "+%Y-%m-%d_%H:%M:%S")
+      mv /btrfs_tmp/@ "/btrfs_tmp/old_roots/$timestamp"
     fi
 
-    # Create a fresh empty root subvolume
-    btrfs subvolume create /mnt/@
+    # Recursively delete old roots older than 7 days (adjust as needed)
+    delete_subvolume_recursively() {
+      IFS=$'\n'
+      for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
+        delete_subvolume_recursively "/btrfs_tmp/$i"
+      done
+      btrfs subvolume delete "$1"
+    }
 
-    umount /mnt
+    for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +7); do
+      delete_subvolume_recursively "$i"
+    done
+
+    # Create a fresh empty root subvolume
+    btrfs subvolume create /btrfs_tmp/@
+
+    umount /btrfs_tmp
   '';
 
   # Enable FUSE for home-manager bind mounts
