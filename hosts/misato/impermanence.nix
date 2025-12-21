@@ -21,19 +21,20 @@
 
     # Critical system paths to persist
     directories = [
+      # Note: /nix is a separate BTRFS subvolume, no need to persist
       "/etc/NetworkManager/system-connections" # Wi-Fi configs
       "/var/lib/bluetooth" # Bluetooth pairings
       "/var/lib/systemd" # Systemd state
       "/var/lib/nixos" # Preserve user/group IDs to prevent reassignment
-      # Note: /nix is a separate BTRFS subvolume, no need to persist
+      "/etc/shadow" # Preserve passwords
     ];
 
     # Files to persist
     files = [
+      # Note: /var/lib/systemd/random-seed removed - conflicts with systemd-random-seed.service
       "/etc/machine-id" # Machine ID
       "/etc/ssh/ssh_host_rsa_key" # SSH host key
       "/etc/ssh/ssh_host_ed25519_key" # SSH host key
-      # Note: /var/lib/systemd/random-seed removed - conflicts with systemd-random-seed.service
     ];
 
     # User-specific persistence using impermanence's user support
