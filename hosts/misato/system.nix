@@ -71,27 +71,19 @@
   };
 
   # Make the root subvolume ephemeral - no backups
-  # This creates a fresh root from @clean on each boot
-  boot.initrd.postResumeCommands = lib.mkAfter ''
+  # Wipe the old root subvolume when LUKS is unlocked but before root mount
+  boot.initrd.luks.postUnlockCommands = ''
     # Mount the BTRFS filesystem root (all subvolumes visible)
     mkdir -p /mnt
     mount -o subvol=/ /dev/mapper/luks-root /mnt
 
-    # Ensure @clean exists and is empty (recreate if necessary)
-    if [[ -e /mnt/@clean ]]; then
-      btrfs subvolume delete /mnt/@clean
-    fi
-    btrfs subvolume create /mnt/@clean
-
-    # Delete old root if it exists and wait for it to complete
+    # Delete the old root subvolume (it's not mounted yet, so this should work)
     if [[ -e /mnt/@ ]]; then
       btrfs subvolume delete /mnt/@
-      # Give btrfs time to clean up
-      sleep 1
     fi
 
-    # Create fresh root as snapshot of @clean
-    btrfs subvolume snapshot /mnt/@clean /mnt/@
+    # Create a fresh empty root subvolume
+    btrfs subvolume create /mnt/@
 
     umount /mnt
   '';
