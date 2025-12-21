@@ -42,10 +42,6 @@
                       mountpoint = "/nix";
                       mountOptions = ["subvol=@nix"];
                     };
-                    "@home" = {
-                      mountpoint = "/home";
-                      mountOptions = ["subvol=@home"];
-                    };
                   };
                 };
               };
