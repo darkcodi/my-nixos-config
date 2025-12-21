@@ -71,24 +71,26 @@
   };
 
   # Make the root subvolume ephemeral - no backups
+  # This creates a fresh root from @clean on each boot
   boot.initrd.postResumeCommands = lib.mkAfter ''
-    # Mount the BTRFS filesystem to a temp location
-    mkdir /btrfs_tmp
-    mount /dev/mapper/luks-root /btrfs_tmp
+    # Mount the BTRFS filesystem root (all subvolumes visible)
+    mkdir -p /mnt
+    mount -o subvol=/ /dev/mapper/luks-root /mnt
 
-    # Create a new temporary subvolume first
-    btrfs subvolume create /btrfs_tmp/@new
-
-    # Delete the old root subvolume
-    if [[ -e /btrfs_tmp/@ ]]; then
-      btrfs subvolume delete /btrfs_tmp/@
+    # Create clean base if it doesn't exist (empty subvolume)
+    if ! [[ -e /mnt/@clean ]]; then
+      btrfs subvolume create /mnt/@clean
     fi
 
-    # Rename the temporary subvolume to the final name
-    mv /btrfs_tmp/@new /btrfs_tmp/@
+    # Delete old root if it exists
+    if [[ -e /mnt/@ ]]; then
+      btrfs subvolume delete /mnt/@
+    fi
 
-    umount /btrfs_tmp
-    rmdir /btrfs_tmp
+    # Snapshot clean base to create fresh root
+    btrfs subvolume snapshot /mnt/@clean /mnt/@
+
+    umount /mnt
   '';
 
   # Enable FUSE for home-manager bind mounts

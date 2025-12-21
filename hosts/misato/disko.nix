@@ -30,6 +30,10 @@
                   type = "btrfs";
                   extraArgs = ["-f"];
                   subvolumes = {
+                    "@clean" = {
+                      # Empty base subvolume for snapshots
+                      # This stays read-only and serves as template
+                    };
                     "@" = {
                       mountpoint = "/";
                       mountOptions = ["subvol=@"];
