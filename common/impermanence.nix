@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  username,
   ...
 }: {
   # File system configuration for persistent storage
@@ -36,7 +37,7 @@
     ];
 
     # User-specific persistence using impermanence's user support
-    users.darkcodi = {
+    users.${username} = {
       directories = [
         ".ssh" # SSH keys
         ".mozilla" # Firefox profile & state

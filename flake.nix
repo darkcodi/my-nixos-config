@@ -48,6 +48,9 @@
               disko.nixosModules.disko
               ./hosts/${hostName}/disko.nix
               ./hosts/${hostName}/system.nix
+              {
+                _module.args.username = cfg.user;
+              }
 
               home-manager.nixosModules.home-manager
               {

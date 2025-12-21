@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  username,
+  ...
+}: {
   # Enable networking
   networking.networkmanager.enable = true;
 
@@ -21,9 +25,9 @@
   };
 
   # Define a user account. Don't forget to set a password with 'passwd'.
-  users.users.darkcodi = {
+  users.users.${username} = {
     isNormalUser = true;
-    description = "darkcodi";
+    description = username;
     initialPassword = "changeme";
     extraGroups = ["networkmanager" "wheel"];
     shell = pkgs.zsh;
