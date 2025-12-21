@@ -45,7 +45,7 @@
       "/etc/machine-id" # Machine ID
       "/etc/ssh/ssh_host_rsa_key" # SSH host key
       "/etc/ssh/ssh_host_ed25519_key" # SSH host key
-      "/var/lib/systemd/random-seed" # Random seed for faster boot
+      # Note: /var/lib/systemd/random-seed removed - conflicts with systemd-random-seed.service
     ];
 
     # User-specific persistence using impermanence's user support
