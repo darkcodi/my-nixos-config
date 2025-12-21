@@ -21,11 +21,5 @@ in {
       path = "${homeDir}/.ssh/id_ed25519.pub";
       mode = "0444";
     };
-
-    hashedPasswordDarkcodi = {
-      file = ./age-files/hashed-password-darkcodi.age;
-      path = "/etc/nixos/hashed-password-darkcodi";
-      mode = "0400";
-    };
   };
 }
