@@ -1,6 +1,5 @@
 {...}: {
   imports = [
-    ../../common/home.nix
     ../../apps/base-packages.nix
     ../../apps/git.nix
     ../../apps/firefox.nix
