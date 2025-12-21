@@ -27,9 +27,7 @@
     initialPassword = "changeme";
     extraGroups = ["networkmanager" "wheel"];
     shell = pkgs.zsh;
-    packages = with pkgs; [
-      #  thunderbird
-    ];
+    packages = with pkgs; [];
   };
 
   # [TEMP] Disable password prompt for sudo
