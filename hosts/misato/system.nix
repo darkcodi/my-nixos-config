@@ -83,7 +83,7 @@
       mv /btrfs_tmp/@ "/btrfs_tmp/old_roots/$timestamp"
     fi
 
-    # Recursively delete old roots older than 7 days (adjust as needed)
+    # Recursively delete ALL old roots immediately (no retention)
     delete_subvolume_recursively() {
       IFS=$'\n'
       for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
@@ -92,7 +92,7 @@
       btrfs subvolume delete "$1"
     }
 
-    for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +7); do
+    for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mindepth 1); do
       delete_subvolume_recursively "$i"
     done
 
