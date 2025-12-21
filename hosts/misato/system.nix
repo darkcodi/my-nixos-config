@@ -61,7 +61,7 @@
       ];
 
       files = [
-        # Add user files here if needed
+        ".zsh_history" # Zsh command history
       ];
     };
   };
