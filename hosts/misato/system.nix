@@ -77,17 +77,20 @@
     mkdir -p /mnt
     mount -o subvol=/ /dev/mapper/luks-root /mnt
 
-    # Create clean base if it doesn't exist (empty subvolume)
-    if ! [[ -e /mnt/@clean ]]; then
-      btrfs subvolume create /mnt/@clean
+    # Ensure @clean exists and is empty (recreate if necessary)
+    if [[ -e /mnt/@clean ]]; then
+      btrfs subvolume delete /mnt/@clean
     fi
+    btrfs subvolume create /mnt/@clean
 
-    # Delete old root if it exists
+    # Delete old root if it exists and wait for it to complete
     if [[ -e /mnt/@ ]]; then
       btrfs subvolume delete /mnt/@
+      # Give btrfs time to clean up
+      sleep 1
     fi
 
-    # Snapshot clean base to create fresh root
+    # Create fresh root as snapshot of @clean
     btrfs subvolume snapshot /mnt/@clean /mnt/@
 
     umount /mnt
