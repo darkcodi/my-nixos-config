@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ./hardware.nix
     ../../common/nixos.nix
@@ -65,6 +69,24 @@
       ];
     };
   };
+
+  # Make the root subvolume ephemeral - no backups
+  boot.initrd.postResumeCommands = lib.mkAfter ''
+    # Mount the BTRFS filesystem to a temp location
+    mkdir /btrfs_tmp
+    mount /dev/mapper/luks-root /btrfs_tmp
+
+    # Delete the old root subvolume
+    if [[ -e /btrfs_tmp/@ ]]; then
+      btrfs subvolume delete /btrfs_tmp/@
+    fi
+
+    # Create a fresh, empty root subvolume
+    btrfs subvolume create /btrfs_tmp/@
+
+    umount /btrfs_tmp
+    rmdir /btrfs_tmp
+  '';
 
   # Enable FUSE for home-manager bind mounts
   programs.fuse.userAllowOther = true;
