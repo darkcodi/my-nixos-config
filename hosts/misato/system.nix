@@ -35,7 +35,7 @@
   users.users.${username} = {
     isNormalUser = true;
     description = username;
-    initialPassword = "changeme";
+    hashedPasswordFile = "/etc/nixos/hashed-password-darkcodi";
     extraGroups = ["networkmanager" "wheel"];
     shell = pkgs.zsh;
     packages = with pkgs; [];
