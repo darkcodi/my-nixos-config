@@ -56,7 +56,8 @@
         ".local/state/nix" # Nix state
         ".local/state/home-manager" # Home-manager state
         ".local/share/nix" # Nix user data
-        "my-nixos-config" # This repository
+        "my-nixos-config" # Main config repo
+        ".claude" # Claude code state (chat history, commands whitelist, etc)
       ];
 
       files = [
