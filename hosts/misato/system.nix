@@ -76,13 +76,16 @@
     mkdir /btrfs_tmp
     mount /dev/mapper/luks-root /btrfs_tmp
 
+    # Create a new temporary subvolume first
+    btrfs subvolume create /btrfs_tmp/@new
+
     # Delete the old root subvolume
     if [[ -e /btrfs_tmp/@ ]]; then
       btrfs subvolume delete /btrfs_tmp/@
     fi
 
-    # Create a fresh, empty root subvolume
-    btrfs subvolume create /btrfs_tmp/@
+    # Rename the temporary subvolume to the final name
+    mv /btrfs_tmp/@new /btrfs_tmp/@
 
     umount /btrfs_tmp
     rmdir /btrfs_tmp
