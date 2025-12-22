@@ -42,6 +42,7 @@
       directories = [
         ".ssh" # SSH keys
         ".mozilla" # Firefox profile & state
+        ".cache" # Firefox stores some state there
         ".local/state/nix" # Nix state
         ".local/state/home-manager" # Home-manager state
         ".local/share/nix" # Nix user data
