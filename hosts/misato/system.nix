@@ -36,8 +36,8 @@
   users.users.${username} = {
     isNormalUser = true;
     description = username;
-    initialPassword = "changeme";
-    #hashedPasswordFile = "/run/agenix/darkcodiPassword";
+    #initialPassword = "changeme";
+    hashedPasswordFile = "/run/agenix/darkcodiPassword";
     extraGroups = ["networkmanager" "wheel"];
     shell = pkgs.zsh;
     packages = with pkgs; [];
