@@ -1,7 +1,7 @@
 {config, ...}: let
   homeDir = config.home.homeDirectory;
 in {
-  age.identityPaths = ["${homeDir}/.ssh/agenix_ssh_key"];
+  age.identityPaths = ["/etc/ssh/agenix_ssh_key"];
 
   age.secrets = {
     minimaxCodingPlanApikey = {
