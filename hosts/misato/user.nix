@@ -7,6 +7,7 @@
     ../../apps/zsh.nix
     ../../apps/direnv.nix
     ../../apps/claude-code.nix
+    ../../apps/rust.nix
     ../../secrets/user-decrypt.nix
   ];
 
