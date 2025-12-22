@@ -21,7 +21,8 @@
     gl = "git log";
     gs = "git status";
     rebuild-switch = "sudo nixos-rebuild switch --flake .#misato";
-    rebuild-test = "sudo nixos-rebuild test --flake .#misato";
+    rebuild-test = "sudo nixos-rebuild test --fast-switch --flake .#misato";
+    rebuild-check = "nix flake check";
     rebuild-rollback = "sudo nixos-rebuild --rollback switch --flake .#misato";
   };
 }
