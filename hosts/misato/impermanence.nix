@@ -45,7 +45,7 @@
         ".local/share/nix" # Nix user data
         ".local/state/home-manager" # Home-manager state
         ".local/state/nix" # Nix state
-        ".mozilla/firefox/darkcodi" # Firefox profile data (cookies, history, etc.)
+        ".mozilla/firefox/default" # Firefox profile data (cookies, history, etc.)
         ".ssh" # SSH keys
 
         "my-nixos-config" # Main config repo
