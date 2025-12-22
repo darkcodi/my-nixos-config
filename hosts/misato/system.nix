@@ -41,6 +41,12 @@
     packages = with pkgs; [];
   };
 
+  # Configure root user with initial password
+  users.users.root = {
+    initialPassword = "changeme";
+    shell = pkgs.bash;
+  };
+
   # [TEMP] Disable password prompt for sudo
   security.sudo = {
     enable = true;
