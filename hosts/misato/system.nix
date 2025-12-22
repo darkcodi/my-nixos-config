@@ -42,12 +42,6 @@
     packages = with pkgs; [];
   };
 
-  # [TEMP] Disable password prompt for sudo
-  security.sudo = {
-    enable = true;
-    wheelNeedsPassword = false;
-  };
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
