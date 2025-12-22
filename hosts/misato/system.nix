@@ -8,6 +8,7 @@
     ./hardware.nix
     ./impermanence.nix
     ../../apps/gnome.nix
+    ../../secrets/system-decrypt.nix
   ];
 
   # Enable networking
@@ -35,7 +36,7 @@
   users.users.${username} = {
     isNormalUser = true;
     description = username;
-    hashedPasswordFile = "/home/darkcodi/.password-hash";
+    hashedPasswordFile = "/run/agenix/darkcodiPassword";
     extraGroups = ["networkmanager" "wheel"];
     shell = pkgs.zsh;
     packages = with pkgs; [];

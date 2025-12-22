@@ -6,7 +6,7 @@
     ../../apps/zsh.nix
     ../../apps/direnv.nix
     ../../apps/claude-code.nix
-    ../../secrets/decrypt.nix
+    ../../secrets/user-decrypt.nix
   ];
 
   # Host-specific aliases

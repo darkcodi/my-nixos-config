@@ -44,6 +44,7 @@
           nixpkgs.lib.nixosSystem {
             system = cfg.system;
             modules = [
+              agenix.nixosModules.default
               impermanence.nixosModules.impermanence
               disko.nixosModules.disko
               ./hosts/${hostName}/disko.nix
