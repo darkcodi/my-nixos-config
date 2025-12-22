@@ -33,6 +33,7 @@
       "/etc/machine-id" # Machine ID
       "/etc/ssh/ssh_host_rsa_key" # SSH host key
       "/etc/ssh/ssh_host_ed25519_key" # SSH host key
+      "/etc/ssh/agenix_ssh_key" # Agenix SSH decryption key
       # Note: /var/lib/systemd/random-seed removed - conflicts with systemd-random-seed.service
     ];
 
