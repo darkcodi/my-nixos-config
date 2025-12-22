@@ -15,7 +15,7 @@
     ga = "git add";
     gc = "git commit";
     gp = "git push";
-    gf = "git diff";
+    gd = "git diff";
     gl = "git log";
     gs = "git status";
     rebuild-switch = "sudo nixos-rebuild switch --flake .#misato";
