@@ -36,17 +36,10 @@
   users.users.${username} = {
     isNormalUser = true;
     description = username;
-    #initialPassword = "changeme";
     hashedPasswordFile = "/run/agenix/darkcodiPassword";
     extraGroups = ["networkmanager" "wheel"];
     shell = pkgs.zsh;
     packages = with pkgs; [];
-  };
-
-  # Configure root user with initial password
-  users.users.root = {
-    initialPassword = "changeme";
-    shell = pkgs.bash;
   };
 
   # [TEMP] Disable password prompt for sudo
