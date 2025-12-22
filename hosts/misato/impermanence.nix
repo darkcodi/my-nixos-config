@@ -40,14 +40,16 @@
     # User-specific persistence using impermanence's user support
     users.${username} = {
       directories = [
-        ".ssh" # SSH keys
-        ".mozilla" # Firefox profile & state
         ".cache" # Firefox stores some state there
-        ".local/state/nix" # Nix state
-        ".local/state/home-manager" # Home-manager state
-        ".local/share/nix" # Nix user data
-        "my-nixos-config" # Main config repo
         ".claude" # Claude code state (chat history, commands whitelist, etc)
+        ".local/share/nix" # Nix user data
+        ".local/state/home-manager" # Home-manager state
+        ".local/state/nix" # Nix state
+        ".mozilla" # Firefox profile & state
+        ".ssh" # SSH keys
+
+        "my-nixos-config" # Main config repo
+        "src" # Source codes
       ];
 
       files = [
