@@ -21,11 +21,5 @@ in {
       path = "${homeDir}/.ssh/id_ed25519.pub";
       mode = "0444";
     };
-
-    darkcodiPassword = {
-      file = ./age-files/darkcodi-password.age;
-      path = "${homeDir}/.password-hash";
-      mode = "0400";
-    };
   };
 }
