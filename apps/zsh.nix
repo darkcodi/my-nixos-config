@@ -13,7 +13,7 @@
       enable = true;
       theme = "robbyrussell";
       plugins = [
-        "git"
+        # "git"
         "sudo"
         # "docker"
       ];

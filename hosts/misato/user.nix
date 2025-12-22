@@ -12,6 +12,12 @@
   # Host-specific aliases
   programs.zsh.shellAliases = {
     ll = "ls -alh";
+    ga = "git add";
+    gc = "git commit";
+    gp = "git push";
+    gf = "git diff";
+    gl = "git log";
+    gs = "git status";
     rebuild-switch = "sudo nixos-rebuild switch --flake .#misato";
     rebuild-test = "sudo nixos-rebuild test --flake .#misato";
     rebuild-rollback = "sudo nixos-rebuild --rollback switch --flake .#misato";
