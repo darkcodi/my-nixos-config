@@ -1,5 +1,5 @@
 {
-  age.identityPaths = ["/etc/ssh/agenix_ssh_key"];
+  age.identityPaths = ["/persistent/etc/ssh/agenix_ssh_key"];
 
   age.secrets = {
     darkcodiPassword = {
