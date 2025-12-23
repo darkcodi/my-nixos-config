@@ -7,6 +7,7 @@
       settings = {
         "app.normandy.first_run" = false;
 
+        "browser.aboutwelcome.didSeeFinalScreen" = true;
         "browser.bookmarks.addedImportButton" = true;
         "browser.bookmarks.restore_default_bookmarks" = false;
         "browser.contentblocking.category" = "strict";
@@ -29,15 +30,26 @@
         "browser.urlbar.placeholderName.private" = "DuckDuckGo"; # set DDG as default search engine
         "browser.urlbar.suggest.quicksuggest.all" = false; # disable FF (and partners) suggestions
 
+        "datareporting.healthreport.uploadEnabled" = false; # disable telemetry healthchecks
+        "datareporting.usage.uploadEnabled" = false; # disable mozilla telemetry
+
+        "doh-rollout.disable-heuristics" = true;
+
         "dom.forms.autocomplete.formautofill" = true;
+        "dom.security.https_only_mode_pbm" = true;
+        "dom.security.https_only_mode_ever_enabled_pbm" = true;
 
         "distribution.nixos.bookmarksProcessed" = true;
 
         "extensions.activeThemeID" = "default-theme@mozilla.org";
+        "extensions.formautofill.creditCards.enabled" = false; # disable payments autofill/saving
+        "extensions.formautofill.addresses.enabled" = false; # disable addresses autofill/saving
 
         "identity.fxaccounts.toolbar.syncSetup.panelAccessed" = true;
 
         "network.http.referer.disallowCrossSiteRelaxingDefault.top_navigation" = true;
+        "network.trr.mode" = 3;
+        "network.trr.uri" = "https://mozilla.cloudflare-dns.com/dns-query";
 
         "privacy.annotate_channels.strict_list.enabled" = true;
         "privacy.bounceTrackingProtection.mode" = 1;
@@ -46,6 +58,8 @@
         "privacy.globalprivacycontrol.was_ever_enabled" = true;
         "privacy.query_stripping.enabled" = true;
         "privacy.query_stripping.enabled.pbmode" = true;
+        "privacy.trackingprotection.allow_list.convenience.enabled" = false;
+        "privacy.trackingprotection.allow_list.baseline.enabled" = false;
         "privacy.trackingprotection.allow_list.hasUserInteractedWithETPSettings" = true;
         "privacy.trackingprotection.consentmanager.skip.pbmode.enabled" = false;
         "privacy.trackingprotection.emailtracking.enabled" = true;
@@ -53,9 +67,17 @@
         "privacy.trackingprotection.socialtracking.enabled" = true;
 
         "sidebar.main.tools" = "syncedtabs,history,bookmarks";
+        "sidebar.notification.badge.aichat" = false;
         "sidebar.revamp" = true;
         "sidebar.verticalTabs" = true;
         "sidebar.verticalTabs.dragToPinPromo.dismissed" = true;
+
+        # disable password saving
+        "signon.rememberSignons" = false;
+        "signon.management.page.breach-alerts.enabled" = false;
+        "signon.autofillForms" = false;
+        "signon.firefoxRelay.feature" = "disabled";
+        "signon.generation.enabled" = false;
 
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         "toolkit.telemetry.reportingpolicy.firstRun" = false;
