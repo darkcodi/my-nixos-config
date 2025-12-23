@@ -6,6 +6,10 @@
     rustfmt
     clippy
 
+    # C compiler for crates that need C dependencies (like cc crate)
+    gcc
+    pkg-config
+
     # Additional Rust tools
     cargo-audit
     cargo-expand
