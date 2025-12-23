@@ -15,9 +15,16 @@
   programs.zsh.shellAliases = {
     ll = "ls -alh";
     ga = "git add";
+    gaa = "git add .";
     gc = "git commit";
+    gcm = "git commit -m";
+    gca = "git commit --amend";
     gp = "git push";
+    gpf = "git push --force";
     gd = "git diff";
+    gds = "git diff --staged";
+    gda = "git diff -a";
+    gdsa = "git diff --staged -a";
     gl = "git log";
     gs = "git status";
     rebuild-switch = "sudo nixos-rebuild switch --flake .#misato";
