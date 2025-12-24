@@ -8,6 +8,7 @@
     ../../apps/direnv.nix
     ../../apps/claude-code.nix
     ../../apps/rust.nix
+    ../../apps/rjd.nix
     ../../secrets/user-decrypt.nix
   ];
 
