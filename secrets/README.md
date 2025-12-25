@@ -16,7 +16,7 @@ Add an entry specifying which public keys can decrypt it:
   "new-secret.age".publicKeys = [ nixos-misato-pubkey ];  # <-- add this
 ```
 
-### 2. Create the encrypted file
+### 3. Create the encrypted file
 
 Run this if you want to paste secret in $EDITOR:
 
@@ -30,7 +30,7 @@ Or run this if you want to encrypt an existing file
 nix run github:ryantm/agenix -- -e new-secret.age < ~/.config/app/credentials.conf
 ```
 
-### 3. Configure decryption in `decrypt.nix`
+### 4. Configure decryption in `decrypt.nix`
 
 Add the secret to `age.secrets` in `secrets/decrypt.nix`:
 
@@ -44,7 +44,7 @@ age.secrets = {
 };
 ```
 
-### 4. Rebuild
+### 5. Rebuild
 
 ```bash
 sudo nixos-rebuild switch --flake .#misato
