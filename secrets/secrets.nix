@@ -5,4 +5,5 @@ in {
   "nixos-misato-ssh-privkey.age".publicKeys = [agenix-pubkey];
   "nixos-misato-ssh-pubkey.age".publicKeys = [agenix-pubkey];
   "darkcodi-password.age".publicKeys = [agenix-pubkey];
+  "zai-coding-plan-apikey.age".publicKeys = [agenix-pubkey];
 }

@@ -21,5 +21,11 @@ in {
       path = "${homeDir}/.ssh/id_ed25519.pub";
       mode = "0444";
     };
+
+    zaiCodingPlanApikey = {
+      file = ./age-files/zai-coding-plan-apikey.age;
+      path = "${homeDir}/.zai/apikey.txt";
+      mode = "0400";
+    };
   };
 }
