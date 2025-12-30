@@ -23,5 +23,21 @@
     rebuild-test = "sudo nixos-rebuild test --fast-switch --flake .#misato";
     rebuild-check = "nix flake check";
     rebuild-rollback = "sudo nixos-rebuild --rollback switch --flake .#misato";
+
+    # Cargo aliases
+    cf = "cargo fmt";
+    cb = "cargo build";
+    ct = "cargo test";
+    cl = "cargo clippy";
+    cr = "cargo run";
+    cbr = "cargo build --release";
+    crr = "cargo run --release";
+    cch = "cargo check";
+    cw = "cargo watch";
+    cdoc = "cargo doc";
+    ca = "cargo add";
+    crm = "cargo remove";
+    cup = "cargo update";
+    ccl = "cargo clean";
   };
 }
