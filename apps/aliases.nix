@@ -28,7 +28,7 @@
     cf = "cargo fmt";
     cb = "cargo build";
     ct = "cargo test";
-    cl = "cargo clippy";
+    ccl = "cargo clippy";
     cr = "cargo run";
     cbr = "cargo build --release";
     crr = "cargo run --release";
@@ -38,6 +38,5 @@
     ca = "cargo add";
     crm = "cargo remove";
     cup = "cargo update";
-    ccl = "cargo clean";
   };
 }
