@@ -1,19 +1,24 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    # Rust toolchain
-    rustc
-    cargo
-    rustfmt
-    clippy
+    # Pinned Rust toolchain from rust-overlay
+    # Version: 1.92.0 (stable, released December 11, 2025)
+    # To update: Change version number and run `nix flake update`
+    (rust-bin.stable."1.92.0".default.override {
+      extensions = [
+        "rust-src" # Standard library sources for rust-analyzer
+        "rust-analyzer" # LSP server (also available separately)
+        "rustfmt" # Code formatter
+        "clippy" # Linter
+      ];
+    })
 
-    # C compiler for crates that need C dependencies (like cc crate)
+    # C compiler for crates with C dependencies (e.g., cc, openssl-sys)
     gcc
     pkg-config
 
-    # Additional Rust tools
-    cargo-audit
-    cargo-expand
-    cargo-watch
-    rust-analyzer
+    # Additional Rust development tools (from nixpkgs)
+    cargo-audit # Security auditing for Cargo dependencies
+    cargo-expand # Macro expansion for debugging
+    cargo-watch # File watching for dev workflow
   ];
 }

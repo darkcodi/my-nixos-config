@@ -14,6 +14,9 @@
     disko.url = "github:nix-community/disko";
 
     impermanence.url = "github:nix-community/impermanence";
+
+    # Add rust-overlay for reproducible Rust toolchains
+    rust-overlay.url = "github:oxalica/rust-overlay";
   };
 
   outputs = {
@@ -23,6 +26,7 @@
     agenix,
     disko,
     impermanence,
+    rust-overlay,
     ...
   }: let
     hosts = {
@@ -49,6 +53,12 @@
               disko.nixosModules.disko
               ./hosts/${hostName}/disko.nix
               ./hosts/${hostName}/system.nix
+
+              # Add rust-overlay to nixpkgs.overlays for global availability
+              ({pkgs, ...}: {
+                nixpkgs.overlays = [rust-overlay.overlays.default];
+              })
+
               {
                 _module.args.username = cfg.user;
               }
