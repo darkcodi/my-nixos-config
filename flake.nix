@@ -4,6 +4,9 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 
+    # Unstable channel for packages not yet in stable (e.g., jetbrains.rust-rover)
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -17,16 +20,21 @@
 
     # Add rust-overlay for reproducible Rust toolchains
     rust-overlay.url = "github:oxalica/rust-overlay";
+
+    # JetBrains plugins for IDE configuration
+    nix-jetbrains-plugins.url = "github:nix-community/nix-jetbrains-plugins";
   };
 
   outputs = {
     self,
     nixpkgs,
+    nixpkgs-unstable,
     home-manager,
     agenix,
     disko,
     impermanence,
     rust-overlay,
+    nix-jetbrains-plugins,
     ...
   }: let
     hosts = {
@@ -76,6 +84,12 @@
                   home.homeDirectory = "/home/${cfg.user}";
                   home.stateVersion = "25.11";
                   programs.home-manager.enable = true;
+
+                  # Make unstable packages available to home-manager configs
+                  _module.args.unstable = import nixpkgs-unstable {
+                    system = cfg.system;
+                    config.allowUnfree = true; # JetBrains is unfree
+                  };
                 };
               }
             ];

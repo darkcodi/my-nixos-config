@@ -10,6 +10,7 @@
     ../../apps/rust.nix
     ../../apps/rjd.nix
     ../../apps/aliases.nix
+    ../../apps/rustrover.nix
     ../../secrets/user-decrypt.nix
   ];
 }
