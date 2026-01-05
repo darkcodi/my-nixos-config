@@ -208,7 +208,7 @@
       '';
       Restart = "always"; # Restart service if it crashes
       RestartSec = "5s"; # Wait 5 seconds before restarting
-      User = "darkcodi"; # Run as user (not root) for X11 access
+      User = username; # Run as user (not root) for X11 access
     };
   };
 
