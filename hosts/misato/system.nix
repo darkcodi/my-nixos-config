@@ -97,6 +97,19 @@
   boot.loader.systemd-boot.configurationLimit = 20;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Power Management - Prevent automatic sleep
+  services.logind.settings.Login = {
+    IdleAction = "ignore";
+    IdleActionSec = 0;
+  };
+
+  # Disable screen blanking
+  services.xserver.displayManager.sessionCommands = ''
+    xset s off
+    xset -dpms
+    xset s noblank
+  '';
+
   networking.hostName = "misato"; # Define your hostname.
 
   # Install zsh
