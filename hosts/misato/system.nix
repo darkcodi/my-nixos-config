@@ -149,10 +149,44 @@
   boot.loader.systemd-boot.configurationLimit = 20;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Power Management - Prevent automatic sleep
-  services.logind.settings.Login = {
-    IdleAction = "ignore";
-    IdleActionSec = 0;
+  # Power Management - Prevent automatic sleep on lid close
+  services.logind = {
+    lidSwitch = "ignore";
+    lidSwitchExternalPower = "ignore";
+    lidSwitchDocked = "ignore";
+  };
+
+  # Custom service to turn off screen when lid is closed
+  systemd.services.lid-screen-handler = {
+    description = "Turn off screen when lid is closed";
+    after = ["graphical.target" "display-manager.service"];
+    wants = ["graphical.target"];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = pkgs.writeShellScript "lid-screen-handler" ''
+        # Set display environment
+        export DISPLAY=:0
+        export XAUTHORITY=/run/user/1000/gdm/Xauthority
+
+        # Monitor lid state
+        while true; do
+          LID_STATE=$(cat /proc/acpi/button/lid/LID0/state 2>/dev/null | awk '{print $2}')
+
+          if [ "$LID_STATE" = "closed" ]; then
+            # Turn off all displays
+            ${pkgs.xorg.xset}/bin/xset dpms force off 2>/dev/null || true
+          else
+            # Turn on displays when lid opens
+            ${pkgs.xorg.xset}/bin/xset dpms force on 2>/dev/null || true
+          fi
+
+          sleep 2
+        done
+      '';
+      Restart = "always";
+      RestartSec = "5s";
+      User = "darkcodi";
+    };
   };
 
   # Disable screen blanking

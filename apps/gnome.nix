@@ -6,6 +6,9 @@
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
 
+  # Disable GNOME power management to allow custom lid handling
+  services.power-profiles-daemon.enable = false;
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
