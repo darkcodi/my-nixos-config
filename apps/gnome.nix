@@ -6,7 +6,14 @@
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
 
-  # Disable GNOME power management to allow custom lid handling
+  # ============================================================================
+  # POWER MANAGEMENT - Disable GNOME's Power Daemon
+  # ============================================================================
+  # GNOME's power-profiles-daemon would override our custom logind lid settings
+  # By disabling it, we ensure our custom behavior is respected:
+  # - No sleep on lid close (handled by systemd-logind in system.nix)
+  # - No sleep from inactivity (handled by systemd-logind in system.nix)
+  # - Screen control via custom lid-screen-handler service (in system.nix)
   services.power-profiles-daemon.enable = false;
 
   # Configure keymap in X11

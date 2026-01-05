@@ -149,16 +149,33 @@
   boot.loader.systemd-boot.configurationLimit = 20;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Power Management - Prevent automatic sleep on lid close and inactivity
+  # ============================================================================
+  # POWER MANAGEMENT - Prevent Sleep & Hibernate
+  # ============================================================================
+  # System behavior: Never sleep from lid close OR inactivity (AC or battery)
+  # - Lid close: Screen turns off, system stays running
+  # - Inactivity: No automatic sleep ever
+  # - Background processes continue uninterrupted (downloads, servers, etc.)
+
   services.logind = {
-    lidSwitch = "ignore";
-    lidSwitchExternalPower = "ignore";
-    lidSwitchDocked = "ignore";
-    idleAction = "ignore";
-    idleActionSec = 0;
+    # Lid close behavior - system NEVER sleeps when closing lid
+    lidSwitch = "ignore"; # On battery: ignore lid close (don't sleep)
+    lidSwitchExternalPower = "ignore"; # On AC power: ignore lid close (don't sleep)
+    lidSwitchDocked = "ignore"; # When docked: ignore lid close (don't sleep)
+
+    # Inactivity behavior - system NEVER sleeps from being idle
+    idleAction = "ignore"; # Don't sleep when inactive
+    idleActionSec = 0; # Disable idle timer completely (0 = disabled)
   };
 
-  # Custom service to turn off screen when lid is closed
+  # ============================================================================
+  # SCREEN MANAGEMENT - Turn Off Display on Lid Close
+  # ============================================================================
+  # Custom systemd service that monitors laptop lid state and controls display
+  # - When lid closes: Turn off screen (system keeps running)
+  # - When lid opens: Turn on screen
+  # - Polls /proc/acpi/button/lid/LID0/state every 2 seconds
+
   systemd.services.lid-screen-handler = {
     description = "Turn off screen when lid is closed";
     after = ["graphical.target" "display-manager.service"];
@@ -166,36 +183,44 @@
     serviceConfig = {
       Type = "simple";
       ExecStart = pkgs.writeShellScript "lid-screen-handler" ''
-        # Set display environment
+        # X11 display environment variables for xset commands
         export DISPLAY=:0
         export XAUTHORITY=/run/user/1000/gdm/Xauthority
 
-        # Monitor lid state
+        # Infinite loop: monitor lid state and control display power
         while true; do
+          # Read lid state from ACPI (outputs: "open" or "closed")
           LID_STATE=$(cat /proc/acpi/button/lid/LID0/state 2>/dev/null | awk '{print $2}')
 
           if [ "$LID_STATE" = "closed" ]; then
-            # Turn off all displays
+            # Lid closed: force all displays to turn off immediately
             ${pkgs.xorg.xset}/bin/xset dpms force off 2>/dev/null || true
           else
-            # Turn on displays when lid opens
+            # Lid opened: force all displays to turn on immediately
             ${pkgs.xorg.xset}/bin/xset dpms force on 2>/dev/null || true
           fi
 
+          # Wait 2 seconds before checking again (prevents excessive CPU usage)
           sleep 2
         done
       '';
-      Restart = "always";
-      RestartSec = "5s";
-      User = "darkcodi";
+      Restart = "always"; # Restart service if it crashes
+      RestartSec = "5s"; # Wait 5 seconds before restarting
+      User = "darkcodi"; # Run as user (not root) for X11 access
     };
   };
 
-  # Disable screen blanking
+  # ============================================================================
+  # SCREEN BLANKING - Disable Automatic Screen Power Saving
+  # ============================================================================
+  # Prevent X11 from automatically turning off screen due to inactivity
+  # - Screen only turns off when lid is closed (handled by service above)
+  # - Screen stays on indefinitely when lid is open
+
   services.xserver.displayManager.sessionCommands = ''
-    xset s off
-    xset -dpms
-    xset s noblank
+    xset s off        # Disable X11 screensaver (no timeout)
+    xset -dpms        # Disable DPMS (Display Power Management Signaling)
+    xset s noblank    # Prevent screen from blanking
   '';
 
   networking.hostName = "misato"; # Define your hostname.
