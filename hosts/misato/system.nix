@@ -164,8 +164,10 @@
     lidSwitchDocked = "ignore"; # When docked: ignore lid close (don't sleep)
 
     # Inactivity behavior - system NEVER sleeps from being idle
-    idleAction = "ignore"; # Don't sleep when inactive
-    idleActionSec = 0; # Disable idle timer completely (0 = disabled)
+    settings.Login = {
+      IdleAction = "ignore"; # Don't sleep when inactive
+      IdleActionSec = 0; # Disable idle timer completely (0 = disabled)
+    };
   };
 
   # ============================================================================
