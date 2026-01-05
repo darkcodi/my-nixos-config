@@ -1,4 +1,4 @@
-{ ... }: {
+{...}: {
   # Enable SSH server with security hardening
   services.openssh = {
     enable = true;

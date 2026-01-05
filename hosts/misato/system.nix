@@ -1,26 +1,39 @@
+# Main system configuration for the 'misato' host
 {
   pkgs,
   lib,
   username,
   ...
 }: {
+  # Import host-specific configurations
   imports = [
-    ./hardware.nix
-    ./impermanence.nix
-    ../../system/security.nix
-    ../../system/performance.nix
-    ../../system/power-management.nix
-    ../../system/locale.nix
-    ../../system/nix.nix
-    ../../system/bootloader.nix
-    ../../system/user-management.nix
-    ../../apps/gnome.nix
-    ../../apps/mosh.nix
-    ../../secrets/system-decrypt.nix
+    ./hardware.nix # Hardware-specific kernel modules and settings
+    ./impermanence.nix # Ephemeral root with selective persistence
+
+    # System-level configurations
+    ../../system/security.nix # Security settings (firewall, sudo, etc.)
+    ../../system/performance.nix # Performance tuning and resource limits
+    ../../system/power-management.nix # Power/sleep settings (system never sleeps)
+    ../../system/locale.nix # Locale, timezone, and keyboard settings
+    ../../system/nix.nix # Nix package manager settings (binary cache, GC, etc.)
+    ../../system/bootloader.nix # Boot loader and kernel parameters
+    ../../system/user-management.nix # User and group definitions
+
+    # Application configurations
+    ../../apps/gnome.nix # GNOME desktop environment
+    ../../apps/mosh.nix # Mosh (mobile shell) for SSH connections
+
+    # Secrets management
+    ../../secrets/system-decrypt.nix # Agenix secret decryption setup
   ];
 
+  # System identity
   networking.hostName = "misato";
-  networking.networkmanager.enable = true;
+  networking.networkmanager.enable = true; # NetworkManager for Wi-Fi and Ethernet
+
+  # Default shell
   programs.zsh.enable = true;
+
+  # NixOS version (DO NOT CHANGE - used for migrations)
   system.stateVersion = "25.11";
 }
