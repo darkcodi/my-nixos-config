@@ -149,11 +149,13 @@
   boot.loader.systemd-boot.configurationLimit = 20;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Power Management - Prevent automatic sleep on lid close
+  # Power Management - Prevent automatic sleep on lid close and inactivity
   services.logind = {
     lidSwitch = "ignore";
     lidSwitchExternalPower = "ignore";
     lidSwitchDocked = "ignore";
+    idleAction = "ignore";
+    idleActionSec = 0;
   };
 
   # Custom service to turn off screen when lid is closed
