@@ -18,7 +18,7 @@
   # Disable GNOME's power profile daemon
   services.power-profiles-daemon.enable = false;
 
-  # Disable GNOME Settings Daemon Power plugin (gsd-power)
+  # Disable GNOME Settings Daemon Power plugin (gsd-power) for user sessions
   # This prevents GNOME from auto-suspending independently of systemd-logind
   services.xserver.desktopManager.gnome.extraGSettingsOverrides = ''
     [org.gnome.settings-daemon.plugins.power]
@@ -28,6 +28,24 @@
     sleep-inactive-battery-type='nothing'
     sleep-inactive-battery-timeout=0
   '';
+
+  # Disable gsd-power for GDM greeter session (the real culprit!)
+  # GDM runs its own gnome-settings-daemon that can trigger suspend independently
+  # We override GDM's service to disable the power plugin
+  services.xserver.displayManager.gdm.settings = {
+    "org/gnome/settings-daemon/plugins/power" = {
+      active = false;
+      sleep-inactive-ac-type = "nothing";
+      sleep-inactive-ac-timeout = 0;
+      sleep-inactive-battery-type = "nothing";
+      sleep-inactive-battery-timeout = 0;
+    };
+  };
+
+  # Additional safeguard: Override GDM systemd service to explicitly disable gsd-power
+  systemd.services."gdm" = {
+    environment.GNOME_SETTINGS_DAEMON_PLUGINS = "a11y-settings:clipboard:color:cursor:date:dummy:housekeeping:keyboard:media-keys:mouse:screenshooter:sound:usb-protection:xsettings:smartcard:wacom";
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {

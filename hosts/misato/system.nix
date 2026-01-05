@@ -176,12 +176,12 @@
   # Custom systemd service that monitors laptop lid state and controls display
   # - When lid closes: Turn off screen (system keeps running)
   # - When lid opens: Turn on screen
-  # - Polls /proc/acpi/button/lid/LID0/state every 2 seconds
+  # - Uses systemd-logind monitoring (more reliable than polling ACPI)
 
   systemd.services.lid-screen-handler = {
     description = "Turn off screen when lid is closed";
     after = ["graphical.target" "display-manager.service"];
-    wants = ["graphical.target"];
+    wantedBy = ["graphical.target"]; # FIXED: was "wants", should be "wantedBy"
     serviceConfig = {
       Type = "simple";
       ExecStart = pkgs.writeShellScript "lid-screen-handler" ''
@@ -189,22 +189,32 @@
         export DISPLAY=:0
         export XAUTHORITY=/run/user/1000/gdm/Xauthority
 
-        # Infinite loop: monitor lid state and control display power
-        while true; do
-          # Read lid state from ACPI (outputs: "open" or "closed")
-          LID_STATE=$(cat /proc/acpi/button/lid/LID0/state 2>/dev/null | awk '{print $2}')
-
-          if [ "$LID_STATE" = "closed" ]; then
-            # Lid closed: force all displays to turn off immediately
+        # Monitor systemd-logind for lid state changes via dbus
+        # This is more reliable than polling ACPI files
+        ${pkgs.dbus}/bin/dbus-monitor --system "interface='org.freedesktop.login1.Manager',member='PrepareForSleep'" 2>/dev/null | \
+        while read -r line; do
+          # Check if system is about to sleep (we've blocked sleep, but this indicates lid close)
+          if echo "$line" | grep -q "boolean true"; then
+            # Lid likely closed or sleep requested - turn off screen
             ${pkgs.xorg.xset}/bin/xset dpms force off 2>/dev/null || true
-          else
-            # Lid opened: force all displays to turn on immediately
+          elif echo "$line" | grep -q "boolean false"; then
+            # System resuming or lid opened - turn on screen
             ${pkgs.xorg.xset}/bin/xset dpms force on 2>/dev/null || true
           fi
+        done &
 
-          # Wait 2 seconds before checking again (prevents excessive CPU usage)
-          sleep 2
-        done
+        # Initial state: check current lid state and set screen accordingly
+        # Use loginctl to check if lid is closed
+        LID_CLOSED=$(${pkgs.systemd}/bin/loginctl show-session $(loginctl | grep ${username} | head -1 | awk '{print $1}') -p LidClosed 2>/dev/null | cut -d= -f2)
+
+        if [ "$LID_CLOSED" = "yes" ]; then
+          ${pkgs.xorg.xset}/bin/xset dpms force off 2>/dev/null || true
+        else
+          ${pkgs.xorg.xset}/bin/xset dpms force on 2>/dev/null || true
+        fi
+
+        # Keep script running so systemd doesn't restart it
+        wait
       '';
       Restart = "always"; # Restart service if it crashes
       RestartSec = "5s"; # Wait 5 seconds before restarting
