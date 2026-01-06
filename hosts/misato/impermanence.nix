@@ -59,6 +59,7 @@
       "/var/lib/bluetooth" # Bluetooth device pairings
       "/var/lib/systemd" # Systemd service state (timers, etc.)
       "/var/lib/nixos" # User/group IDs (prevent UID/GID reassignment on reinstall)
+      "/var/lib/tailscale" # Tailscale state (machine identity, keys, config)
       # Note: /nix is a separate BTRFS subvolume (@nix) → no need to persist
     ];
 

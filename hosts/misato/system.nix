@@ -18,6 +18,7 @@
     ../../system/nix.nix # Nix package manager settings (binary cache, GC, etc.)
     ../../system/bootloader.nix # Boot loader and kernel parameters
     ../../system/user-management.nix # User and group definitions
+    ../../system/tailscale.nix # Tailscale VPN service
 
     # Application configurations
     ../../apps/gnome.nix # GNOME desktop environment

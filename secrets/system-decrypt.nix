@@ -7,5 +7,13 @@
       path = "/run/agenix/darkcodiPassword";
       mode = "0400";
     };
+
+    tailscale-auth-key = {
+      file = ./age-files/tailscale-auth-key.age;
+      path = "/run/agenix/tailscale-auth-key";
+      mode = "0400";
+      owner = "root";
+      group = "root";
+    };
   };
 }
