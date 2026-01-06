@@ -19,7 +19,12 @@
   services.power-profiles-daemon.enable = false;
 
   # Disable GNOME Settings Daemon Power plugin (gsd-power) for user sessions
-  # This prevents GNOME from auto-suspending independently of systemd-logind
+  # CRITICAL: Must disable the systemd user service that launches gsd-power
+  # gsd-power has its own sleep timers that work independently of systemd-logind
+  systemd.user.services."org.gnome.SettingsDaemon.Power".enable = false;
+  systemd.user.targets."org.gnome.SettingsDaemon.Power".enable = false;
+
+  # Set gsettings to ensure GNOME UI respects the disabled state
   services.xserver.desktopManager.gnome.extraGSettingsOverrides = ''
     [org.gnome.settings-daemon.plugins.power]
     active=false
@@ -41,6 +46,10 @@
       sleep-inactive-battery-timeout = 0;
     };
   };
+
+  # Set GNOME_SETTINGS_DAEMON_PLUGINS environment variable globally
+  # This prevents gsd-power from loading in both GDM and user sessions
+  environment.sessionVariables.GNOME_SETTINGS_DAEMON_PLUGINS = "a11y-settings:clipboard:color:cursor:date:dummy:housekeeping:keyboard:media-keys:mouse:screenshooter:sound:usb-protection:xsettings:smartcard:wacom";
 
   # Additional safeguard: Override GDM systemd service to explicitly disable gsd-power
   systemd.services."gdm" = {
