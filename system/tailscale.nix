@@ -20,9 +20,9 @@
 
     # Enable Tailscale features
     extraUpFlags = [
-      "--ssh" # Enable Tailscale SSH (accept connections from Tailscale IPs)
+      "--ssh=false" # Explicitly disable Tailscale SSH
       "--accept-routes" # Accept subnet routes from other nodes
-      "--operator=darkcodi" # Set operator user for Tailscale SSH
+      "--operator=darkcodi" # Set operator user for tailscale status
     ];
   };
 
