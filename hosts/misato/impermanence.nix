@@ -83,6 +83,7 @@
       directories = [
         ".cache" # Application cache (Firefox stores state here)
         ".claude" # Claude Code state (chat history, command whitelist, etc.)
+        ".config/op" # 1Password CLI config, accounts, and session tokens
         ".local/share/nix" # Nix user profile data
         ".local/state/home-manager" # Home-manager state (generations, etc.)
         ".local/state/nix" # Nix user state (profiles, etc.)
