@@ -25,7 +25,7 @@
   systemd.user.targets."org.gnome.SettingsDaemon.Power".enable = false;
 
   # Set gsettings to ensure GNOME UI respects the disabled state
-  services.xserver.desktopManager.gnome.extraGSettingsOverrides = ''
+  services.desktopManager.gnome.extraGSettingsOverrides = ''
     [org.gnome.settings-daemon.plugins.power]
     active=false
     sleep-inactive-ac-type='nothing'
@@ -37,7 +37,7 @@
   # Disable gsd-power for GDM greeter session (the real culprit!)
   # GDM runs its own gnome-settings-daemon that can trigger suspend independently
   # We override GDM's service to disable the power plugin
-  services.xserver.displayManager.gdm.settings = {
+  services.displayManager.gdm.settings = {
     "org/gnome/settings-daemon/plugins/power" = {
       active = false;
       sleep-inactive-ac-type = "nothing";

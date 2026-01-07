@@ -12,15 +12,14 @@
   # - Background processes continue uninterrupted (downloads, servers, etc.)
 
   services.logind = {
-    # Lid close behavior - system NEVER sleeps when closing lid
-    lidSwitch = "ignore"; # On battery: ignore lid close (don't sleep)
-    lidSwitchExternalPower = "ignore"; # On AC power: ignore lid close (don't sleep)
-    lidSwitchDocked = "ignore"; # When docked: ignore lid close (don't sleep)
-
     # Inactivity behavior - system NEVER sleeps from being idle
     settings.Login = {
       IdleAction = "ignore"; # Don't sleep when inactive
       IdleActionSec = 0; # Disable idle timer completely (0 = disabled)
+      # Lid close behavior - system NEVER sleeps when closing lid
+      HandleLidSwitch = "ignore"; # On battery: ignore lid close (don't sleep)
+      HandleLidSwitchExternalPower = "ignore"; # On AC power: ignore lid close (don't sleep)
+      HandleLidSwitchDocked = "ignore"; # When docked: ignore lid close (don't sleep)
     };
   };
 
