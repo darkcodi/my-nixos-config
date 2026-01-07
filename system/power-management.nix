@@ -20,6 +20,8 @@
       HandleLidSwitch = "ignore"; # On battery: ignore lid close (don't sleep)
       HandleLidSwitchExternalPower = "ignore"; # On AC power: ignore lid close (don't sleep)
       HandleLidSwitchDocked = "ignore"; # When docked: ignore lid close (don't sleep)
+      # Session termination behavior - user sessions NEVER terminate due to inactivity
+      StopIdleSessionSec = "infinity"; # Prevent automatic logout of idle user sessions
     };
   };
 

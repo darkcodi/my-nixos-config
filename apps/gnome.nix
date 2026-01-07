@@ -32,6 +32,9 @@
     sleep-inactive-ac-timeout=0
     sleep-inactive-battery-type='nothing'
     sleep-inactive-battery-timeout=0
+
+    [org.gnome.desktop.session]
+    idle-delay=0
   '';
 
   # Disable gsd-power for GDM greeter session (the real culprit!)
