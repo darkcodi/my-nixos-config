@@ -38,5 +38,10 @@
     ca = "cargo add";
     crm = "cargo remove";
     cup = "cargo update";
+
+    # 1Password aliases
+    opp = "op item get \"$1\" --fields password";
+    ops = "op item list --search \"$1\"";
+    opg = "op item get \"$1\"";
   };
 }
