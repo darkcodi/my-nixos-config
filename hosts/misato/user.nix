@@ -8,6 +8,7 @@
     ../../apps/claude-code.nix
     ../../apps/rust.nix
     ../../apps/rjd.nix
+    ../../apps/ffcv.nix
     ../../apps/aliases.nix
     ../../apps/rustrover.nix
     ../../secrets/user-decrypt.nix
