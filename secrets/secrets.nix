@@ -7,4 +7,5 @@ in {
   "age-files/darkcodi-password.age".publicKeys = [agenix-pubkey];
   "age-files/zai-coding-plan-apikey.age".publicKeys = [agenix-pubkey];
   "age-files/tailscale-auth-key.age".publicKeys = [agenix-pubkey];
+  "age-files/crates-io-api-token.age".publicKeys = [agenix-pubkey];
 }

@@ -27,5 +27,11 @@ in {
       path = "${homeDir}/.zai/apikey.txt";
       mode = "0400";
     };
+
+    cratesIoApiToken = {
+      file = ./age-files/crates-io-api-token.age;
+      path = "${homeDir}/.crates-io/apitoken.txt";
+      mode = "0400";
+    };
   };
 }
