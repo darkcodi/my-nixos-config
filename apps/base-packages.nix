@@ -10,6 +10,7 @@
     jq
     yq
     tree
+    unzip
     age
     glow
     helix
