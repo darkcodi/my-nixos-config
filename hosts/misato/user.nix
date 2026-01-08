@@ -7,6 +7,7 @@
     ../../apps/direnv.nix
     ../../apps/claude-code.nix
     ../../apps/rust.nix
+    ../../apps/nodejs.nix
     ../../apps/rjd.nix
     ../../apps/ffcv.nix
     ../../apps/aliases.nix
