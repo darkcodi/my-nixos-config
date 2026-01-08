@@ -8,6 +8,7 @@
     ../../apps/claude-code.nix
     ../../apps/rust.nix
     ../../apps/nodejs.nix
+    ../../apps/openspec.nix
     ../../apps/rjd.nix
     ../../apps/ffcv.nix
     ../../apps/aliases.nix
