@@ -14,5 +14,6 @@
     age
     glow
     helix
+    xxd
   ];
 }
