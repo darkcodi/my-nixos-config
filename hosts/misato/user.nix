@@ -9,6 +9,7 @@
     ../../apps/rust.nix
     ../../apps/nodejs.nix
     ../../apps/openspec.nix
+    ../../apps/python.nix
     ../../apps/rjd.nix
     ../../apps/ffcv.nix
     ../../apps/aliases.nix
