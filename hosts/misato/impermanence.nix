@@ -90,6 +90,9 @@
         ".mozilla/firefox/default" # Firefox profile (cookies, history, bookmarks, etc.)
         ".ssh" # SSH keys and config
 
+        # MEGAcmd data (credentials, cache, metadata, sync state)
+        ".megaCmd"
+
         "my-nixos-config" # This NixOS configuration repository
         "src" # Source code repositories
       ];
