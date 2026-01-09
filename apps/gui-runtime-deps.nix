@@ -79,4 +79,7 @@
   ];
 
   environment.pathsToLink = ["/lib/pkgconfig"];
+  environment.sessionVariables = {
+    PKG_CONFIG_PATH = "/run/current-system/sw/lib/pkgconfig";
+  };
 }
