@@ -24,6 +24,7 @@
     ../../apps/gnome.nix # GNOME desktop environment
     ../../apps/mosh.nix # Mosh (mobile shell) for SSH connections
     ../../apps/rclone-mega.nix # Rclone MEGA cloud storage mount
+    ../../apps/gui-runtime-deps.nix # Common GUI runtime libraries (webkitgtk, gtk3, etc.)
 
     # Secrets management
     ../../secrets/system-decrypt.nix # Agenix secret decryption setup
