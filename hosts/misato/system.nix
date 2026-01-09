@@ -39,6 +39,11 @@
   # Default shell
   programs.zsh.enable = true;
 
+  # System packages
+  environment.systemPackages = with pkgs; [
+    nixos-option # Tool to explore NixOS configuration options
+  ];
+
   # NixOS version (DO NOT CHANGE - used for migrations)
   system.stateVersion = "25.11";
 }
