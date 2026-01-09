@@ -15,5 +15,8 @@
     glow
     helix
     xxd
+    htop # Interactive process viewer
+    bottom # Cross-platform graphical system monitor
+    zenith # System monitor with zoomable charts and network/disk I/O
   ];
 }
