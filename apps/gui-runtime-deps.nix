@@ -61,7 +61,9 @@
     xorg.libXinerama
     xorg.libXinerama.dev
 
-    # WebKit2GTK dependencies (libsoup comes from webkitgtk_4_1)
+    # WebKit2GTK dependencies
+    libsoup_3
+    libsoup_3.dev
     sqlite
     libxml2
     libxml2.dev
