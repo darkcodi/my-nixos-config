@@ -13,6 +13,7 @@
     # System-level configurations
     ../../system/security.nix # Security settings (firewall, sudo, etc.)
     ../../system/performance.nix # Performance tuning and resource limits
+    ../../system/swap.nix # ZRAM swap and memory management
     ../../system/power-management.nix # Power/sleep settings (system never sleeps)
     ../../system/locale.nix # Locale, timezone, and keyboard settings
     ../../system/journald.nix # Journal logging with automatic cleanup
