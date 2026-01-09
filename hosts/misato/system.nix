@@ -19,7 +19,6 @@
     ../../system/bootloader.nix # Boot loader and kernel parameters
     ../../system/user-management.nix # User and group definitions
     ../../system/tailscale.nix # Tailscale VPN service
-    ../../system/mega.nix # MEGA cloud storage
 
     # Application configurations
     ../../apps/gnome.nix # GNOME desktop environment
