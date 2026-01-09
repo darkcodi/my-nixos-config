@@ -15,6 +15,7 @@
     ../../system/performance.nix # Performance tuning and resource limits
     ../../system/power-management.nix # Power/sleep settings (system never sleeps)
     ../../system/locale.nix # Locale, timezone, and keyboard settings
+    ../../system/journald.nix # Journal logging with automatic cleanup
     ../../system/nix.nix # Nix package manager settings (binary cache, GC, etc.)
     ../../system/bootloader.nix # Boot loader and kernel parameters
     ../../system/user-management.nix # User and group definitions
