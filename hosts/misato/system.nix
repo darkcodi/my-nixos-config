@@ -23,6 +23,7 @@
     # Application configurations
     ../../apps/gnome.nix # GNOME desktop environment
     ../../apps/mosh.nix # Mosh (mobile shell) for SSH connections
+    ../../apps/rclone-mega.nix # Rclone MEGA cloud storage mount
 
     # Secrets management
     ../../secrets/system-decrypt.nix # Agenix secret decryption setup

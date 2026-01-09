@@ -56,6 +56,7 @@
     # These will be bind-mounted from /persistent/{dir} to {dir}
     directories = [
       "/etc/NetworkManager/system-connections" # Wi-Fi networks and passwords
+      "/etc/rclone" # Rclone cloud storage credentials (MEGA, etc.)
       "/var/lib/bluetooth" # Bluetooth device pairings
       "/var/lib/systemd" # Systemd service state (timers, etc.)
       "/var/lib/nixos" # User/group IDs (prevent UID/GID reassignment on reinstall)
