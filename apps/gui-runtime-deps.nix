@@ -14,4 +14,6 @@
     libepoxy
     wayland
   ];
+
+  environment.pathsToLink = ["/lib/pkgconfig"];
 }
