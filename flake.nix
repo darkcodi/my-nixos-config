@@ -21,6 +21,9 @@
     # Add rust-overlay for reproducible Rust toolchains
     rust-overlay.url = "github:oxalica/rust-overlay";
 
+    # Add naersk for building Rust packages with automatic Cargo.lock handling
+    naersk.url = "github:nix-community/naersk";
+
     # JetBrains plugins for IDE configuration
     nix-jetbrains-plugins.url = "github:nix-community/nix-jetbrains-plugins";
   };
@@ -34,6 +37,7 @@
     disko,
     impermanence,
     rust-overlay,
+    naersk,
     nix-jetbrains-plugins,
     ...
   }: let
@@ -62,9 +66,14 @@
               ./hosts/${hostName}/disko.nix
               ./hosts/${hostName}/system.nix
 
-              # Add rust-overlay to nixpkgs.overlays for global availability
+              # Add rust-overlay and naersk to nixpkgs.overlays for global availability
               ({pkgs, ...}: {
-                nixpkgs.overlays = [rust-overlay.overlays.default];
+                nixpkgs.overlays = [
+                  rust-overlay.overlays.default
+                  (final: prev: {
+                    naersk = prev.callPackage naersk { };
+                  })
+                ];
               })
 
               {
