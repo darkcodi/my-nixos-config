@@ -7,7 +7,6 @@
     ../../apps/direnv.nix
     ../../apps/claude-code.nix
     ../../apps/rust.nix
-    ../../apps/cargo.nix
     ../../apps/nodejs.nix
     ../../apps/openspec.nix
     ../../apps/python.nix
