@@ -10,6 +10,8 @@
     # Graphics and rendering
     gdk-pixbuf
     gdk-pixbuf.dev
+    librsvg
+    librsvg.dev
     glib
     glib.dev
     pango
@@ -76,6 +78,11 @@
     gst_all_1.gstreamer.dev
     gst_all_1.gst-plugins-base
     gst_all_1.gst-plugins-base.dev
+
+    # Tauri-specific dependencies
+    openssl_3_6 # SSL/TLS support
+    libayatana-appindicator # System tray support
+    xdotool # X11 window automation
   ];
 
   environment.pathsToLink = ["/lib/pkgconfig"];
