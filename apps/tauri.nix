@@ -15,6 +15,7 @@
   };
 in {
   home.packages = with pkgs; [
-    create-tauri-app
+    cargo-tauri # CLI tool for building Tauri apps
+    create-tauri-app # Scaffold new Tauri projects
   ];
 }

@@ -19,7 +19,6 @@
     # Additional Rust development tools (from nixpkgs)
     cargo-audit # Security auditing for Cargo dependencies
     cargo-expand # Macro expansion for debugging
-    cargo-tauri # CLI tool for building Tauri apps
     cargo-watch # File watching for dev workflow
   ];
 }

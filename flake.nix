@@ -71,7 +71,7 @@
                 nixpkgs.overlays = [
                   rust-overlay.overlays.default
                   (final: prev: {
-                    naersk = prev.callPackage naersk { };
+                    naersk = prev.callPackage naersk {};
                   })
                 ];
               })

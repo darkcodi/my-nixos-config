@@ -12,7 +12,7 @@
     ../../apps/python.nix
     ../../apps/rjd.nix
     ../../apps/ffcv.nix
-    ../../apps/create-tauri-app.nix
+    ../../apps/tauri.nix
     ../../apps/aliases.nix
     ../../apps/rustrover.nix
     ../../secrets/user-decrypt.nix
