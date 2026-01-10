@@ -5,8 +5,21 @@
 }: let
   claudeOriginal = pkgs.claude-code;
   claudeWrapped = pkgs.writeShellScriptBin "claude" ''
-    #export ANTHROPIC_AUTH_TOKEN="$(cat ${config.age.secrets.minimaxCodingPlanApikey.path})"
-    export ANTHROPIC_AUTH_TOKEN="$(cat ${config.age.secrets.zaiCodingPlanApikey.path})"
+    # Check if secret is available before using it
+    secret_path="${config.age.secrets.zaiCodingPlanApikey.path}"
+
+    if [ ! -f "$secret_path" ]; then
+      echo "❌ Error: Claude Code API secret not available" >&2
+      echo "   Expected at: $secret_path" >&2
+      echo "" >&2
+      echo "Troubleshooting:" >&2
+      echo "  1. Check agenix: systemctl --user status agenix.service" >&2
+      echo "  2. Check secret: ls -la ~/.zai/apikey.txt" >&2
+      echo "  3. Rebuild: sudo nixos-rebuild switch --flake .#misato" >&2
+      exit 1
+    fi
+
+    export ANTHROPIC_AUTH_TOKEN="$(cat "$secret_path")"
     exec ${claudeOriginal}/bin/claude "$@"
   '';
 in {

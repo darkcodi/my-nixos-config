@@ -85,6 +85,15 @@
                   home.stateVersion = "25.11";
                   programs.home-manager.enable = true;
 
+                  # Ensure agenix secrets are deployed before Home Manager activation
+                  # Fixes race condition where activation runs before secrets are decrypted
+                  systemd.user.services."home-manager-${cfg.user}" = {
+                    Unit = {
+                      After = "agenix.service";
+                      Requires = "agenix.service";
+                    };
+                  };
+
                   # Make unstable packages available to home-manager configs
                   _module.args.unstable = import nixpkgs-unstable {
                     system = cfg.system;

@@ -30,6 +30,7 @@ in {
 
     cratesIoApiToken = {
       file = ./age-files/crates-io-api-token.age;
+      path = "${homeDir}/.crates-io/apitoken.txt";
       mode = "0400";
     };
   };
