@@ -33,5 +33,9 @@
     cargo-audit # Security auditing
     cargo-expand # Macro expansion debugging
     cargo-watch # File watching for dev workflow
+
+    # Embedded ARM development tools
+    flip-link # linker for ARM Cortex-M with stack overflow protection
+    probe-rs-tools # CLI tool for debugging and flashing ARM chips
   ];
 }
