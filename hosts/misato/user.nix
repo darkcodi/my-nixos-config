@@ -17,6 +17,7 @@
     ../../apps/rustrover.nix
     ../../apps/zed.nix
     ../../apps/gcolor3.nix
+    ../../apps/croc.nix
     ../../secrets/user-decrypt.nix
   ];
 }
