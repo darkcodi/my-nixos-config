@@ -15,6 +15,7 @@
     ../../apps/tauri.nix
     ../../apps/aliases.nix
     ../../apps/rustrover.nix
+    ../../apps/zed.nix
     ../../secrets/user-decrypt.nix
   ];
 }
