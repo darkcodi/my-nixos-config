@@ -25,16 +25,22 @@
 
     # User settings written to settings.json
     userSettings = {
+      # Theme
+      theme = "Ayu Mirage";
+
+      # Language-specific settings
+      languages = {
+        Rust = {
+          colorize_brackets = true;
+          show_whitespaces = "selection";
+        };
+      };
+
       # Disable telemetry
       telemetry = {
         diagnostics = false;
         metrics = false;
       };
-
-      # Additional settings can be added here
-      # ui_font_size = 16;
-      # buffer_font_size = 16;
-      # vim_mode = true;
     };
 
     # Extensions to auto-install on startup
