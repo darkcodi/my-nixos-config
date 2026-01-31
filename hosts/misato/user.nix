@@ -18,6 +18,7 @@
     ../../apps/zed.nix
     ../../apps/gcolor3.nix
     ../../apps/croc.nix
+    ../../apps/mosquitto.nix
     ../../secrets/user-decrypt.nix
   ];
 }
